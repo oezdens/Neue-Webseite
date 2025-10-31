@@ -2,7 +2,7 @@ import { Code2, Github, Linkedin, Mail } from "lucide-react"; // Icons für Soci
 
 const socialLinks = [
   { icon: Github, href: "#", name: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/serhat-%C3%B6zden-958130361/", name: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/serhat-%C3%B6zden-958130361/", name: "LinkedIn", target: '_blank', rel: 'noopener noreferrer' },
   { icon: Mail, href: "#", name: "Email" },
 ];
 
@@ -61,11 +61,13 @@ export function Footer() {
             
             <div className="flex space-x-4">
               {socialLinks.map((link) => (
-                <a 
+                <a
                   key={link.name}
                   href={link.href}
                   aria-label={link.name}
                   className="text-slate-400 hover:text-purple-400 transition-colors"
+                  target={link.target}
+                  rel={link.rel}
                 >
                   <link.icon className="w-6 h-6" />
                 </a>
