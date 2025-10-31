@@ -108,7 +108,7 @@ export default function AboutMe() {
           </div>
 
           {/* Hero Section */}
-          <div id="ueber-mich" className="mt-8 mb-12">
+          <div id="ueber-mich" className="mt-20 mb-12">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left: Text Content */}
               <div className="space-y-8">
