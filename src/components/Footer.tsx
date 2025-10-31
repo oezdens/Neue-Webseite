@@ -2,7 +2,7 @@ import { Code2, Github, Linkedin, Mail } from "lucide-react"; // Icons für Soci
 
 const socialLinks = [
   { icon: Github, href: "#", name: "GitHub" },
-  { icon: Linkedin, href: "#", name: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/serhat-%C3%B6zden-958130361/", name: "LinkedIn" },
   { icon: Mail, href: "#", name: "Email" },
 ];
 
