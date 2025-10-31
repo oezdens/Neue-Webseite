@@ -1,5 +1,7 @@
 import { Rocket, Sparkles, Award, TrendingUp, Users, Code2, Smartphone, Palette } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+// Local profile image (existing file is ich.jpg in src)
+import ich from "../ich.jpg";
 
 export default function AboutMe() {
   const highlights = [
@@ -26,7 +28,7 @@ export default function AboutMe() {
       description: "Benutzerfreundliche Interfaces mit Fokus auf optimale User Experience."
     }
   ];
-
+  
   // Inline-definierte Animationen als Style-Objekte
   const gradientAnimation = {
     animation: 'aboutme-gradient-xy 8s ease infinite',
@@ -67,7 +69,7 @@ export default function AboutMe() {
 
   <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
           {/* Services Section */}
-          <div id="leistungen" className="mb-40">
+       <div id="leistungen" className="mb-32 md:mb-[30rem]">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 backdrop-blur-sm mb-6">
                 <Sparkles className="w-4 h-4 text-yellow-400" />
@@ -108,7 +110,7 @@ export default function AboutMe() {
           </div>
 
           {/* Hero Section */}
-          <div id="ueber-mich" className="mt-20 mb-12">
+            <div id="ueber-mich" className="mt-12 md:mt-[10rem] mb-12">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left: Text Content */}
               <div className="space-y-8">
@@ -160,8 +162,8 @@ export default function AboutMe() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
                 <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-4 overflow-hidden">
                   <div className="aspect-square rounded-2xl overflow-hidden">
-                    <ImageWithFallback 
-                      src="https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYxODM5OTU0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                    <ImageWithFallback
+                      src={ich}
                       alt="Developer Workspace"
                       className="w-full h-full object-cover"
                     />
