@@ -8,10 +8,19 @@ export function Header() {
     const element = document.getElementById(id);
     if (element) {
       // measure header height and scroll with offset so the target isn't hidden
+      // For the Kontakt section we want a slightly smaller gap (appear a bit higher),
+      // so apply a special adjustment. Other sections keep the previous gap.
       const headerEl = document.querySelector('header') as HTMLElement | null;
       const headerHeight = headerEl ? headerEl.offsetHeight : 120;
       const top = element.getBoundingClientRect().top + window.scrollY;
-      const desired = Math.max(0, top - headerHeight - 16);
+      let desired: number;
+      if (id === "kontakt") {
+        // smaller gap: move the target a bit higher (closer to the header)
+        desired = Math.max(0, top - headerHeight + 8);
+      } else {
+        // previous behavior: small comfortable gap below the header
+        desired = Math.max(0, top - headerHeight - 16);
+      }
       window.scrollTo({ top: desired, behavior: 'smooth' });
       setActiveSection(id);
       return;
@@ -116,10 +125,15 @@ export function Header() {
 
             {/* Kontakt-Button */}
             <a
-              href="#contact"
+              href="/#kontakt"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("kontakt");
+              }}
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-1.5 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium"
+              aria-label="Kontakt"
             >
-              Contact
+              Kontakt
             </a>
           </nav>
       </div>

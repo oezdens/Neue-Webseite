@@ -67,7 +67,7 @@ export default function AboutMe() {
 
   <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
           {/* Services Section */}
-          <div id="leistungen" className="mb-32">
+          <div id="leistungen" className="mb-40">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 backdrop-blur-sm mb-6">
                 <Sparkles className="w-4 h-4 text-yellow-400" />
@@ -108,7 +108,7 @@ export default function AboutMe() {
           </div>
 
           {/* Hero Section */}
-          <div id="ueber-mich" className="mt-6 mb-12">
+          <div id="ueber-mich" className="mt-8 mb-12">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left: Text Content */}
               <div className="space-y-8">
