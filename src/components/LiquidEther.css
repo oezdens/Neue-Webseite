@@ -1,0 +1,11 @@
+.liquid-ether-container {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	touch-action: none;
+	pointer-events: none; /* allow clicks through to content */
+	/* small default transparency; override with --liquid-ether-opacity */
+	opacity: var(--liquid-ether-opacity, 0.88);
+	will-change: opacity;
+}
