@@ -38,6 +38,36 @@ export default function AboutMe() {
     animation: 'aboutme-float 6s ease-in-out infinite',
   };
 
+  // helper to scroll to the process/ablauf section with header offset
+  const scrollToProcess = () => {
+    const element = document.getElementById("ablauf");
+    if (element) {
+      const headerEl = document.querySelector('header') as HTMLElement | null;
+      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      const desired = Math.max(0, top - headerHeight - 16);
+      window.scrollTo({ top: desired, behavior: 'smooth' });
+      return;
+    }
+    // fallback to root+hash when clicked from another page
+    window.location.href = '/#ablauf';
+  };
+
+  // helper to scroll to the Leistungen section with header offset
+  const scrollToLeistungen = () => {
+    const element = document.getElementById("leistungen");
+    if (element) {
+      const headerEl = document.querySelector('header') as HTMLElement | null;
+      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      // smaller gap than default so the section appears a bit higher (closer to header)
+      const desired = Math.max(0, top - headerHeight + 8);
+      window.scrollTo({ top: desired, behavior: 'smooth' });
+      return;
+    }
+    window.location.href = '/#leistungen';
+  };
+
   return (
     <>
       <style>{`
@@ -127,7 +157,7 @@ export default function AboutMe() {
                     </span>
                   </h1>
                   
-                  <p className="text-xl text-slate-400 leading-relaxed mb-6">
+                  <p className="text-lg text-slate-400 leading-relaxed mb-6">
                  Als studierter Informatiker mit über 9 Jahren Berufserfahrung und hauptberuflichem Teamleiter verbinde ich fundiertes technisches Know-how in Apps, Automation und KI mit der Kreativität eines leidenschaftlichen Webentwicklers, um Ihre digitalen Visionen in maßgeschneiderte, hervorragend funktionierende Webseiten umzusetzen, die garantiert 50% günstiger sind als Agenturen.
                   </p>
 
@@ -139,7 +169,8 @@ export default function AboutMe() {
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                  <button className="group relative px-8 py-4 rounded-full overflow-hidden">
+                  <button onClick={() => scrollToProcess()} className="group relative px-8 py-4 rounded-full overflow-hidden">
+                    
                     <div 
                       className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%]" 
                       style={{ animation: 'aboutme-gradient-xy 3s ease infinite' }}
@@ -151,8 +182,8 @@ export default function AboutMe() {
                     </span>
                   </button>
                   
-                  <button className="px-8 py-4 rounded-full border-2 border-slate-700 text-slate-300 hover:border-purple-500 hover:text-white transition-all duration-300 backdrop-blur-sm">
-                    Portfolio ansehen
+                  <button onClick={() => scrollToLeistungen()} className="px-8 py-4 rounded-full border-2 border-slate-700 text-slate-300 hover:border-purple-500 hover:text-white transition-all duration-300 backdrop-blur-sm">
+                    Meine Leistungen
                   </button>
                 </div>
               </div>

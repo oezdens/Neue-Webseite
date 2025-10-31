@@ -136,8 +136,23 @@ export default function ProcessAlternative() {
                 </span>
               </button>
               
-              <button className="px-8 py-4 rounded-full border-2 border-slate-700 text-slate-300 hover:border-purple-500 hover:text-white transition-all duration-300 backdrop-blur-sm font-medium">
-                Mehr erfahren
+              <button
+                onClick={() => {
+                  const element = document.getElementById("kontakt");
+                  if (element) {
+                    const headerEl = document.querySelector('header') as HTMLElement | null;
+                    const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+                    const top = element.getBoundingClientRect().top + window.scrollY;
+                    const desired = Math.max(0, top - headerHeight - 8);
+                    window.scrollTo({ top: desired, behavior: 'smooth' });
+                    return;
+                  }
+                  // fallback when not on main page
+                  window.location.href = '/#kontakt';
+                }}
+                className="px-8 py-4 rounded-full border-2 border-slate-700 text-slate-300 hover:border-purple-500 hover:text-white transition-all duration-300 backdrop-blur-sm font-medium"
+              >
+                Kontakt aufnehmen
               </button>
             </div>
 

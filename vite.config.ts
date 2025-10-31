@@ -4,6 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
+    // Use relative base so the built assets work on GitHub Pages under repo paths
+    base: './',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

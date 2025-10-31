@@ -52,8 +52,22 @@ export function Footer() {
           {/* Spalte 4: Kontakt & Social Media */}
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-semibold text-white mb-4">Kontakt</h3>
-            <a 
-              href="#contact"
+            <a
+              href="#kontakt"
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById("kontakt");
+                if (element) {
+                  const headerEl = document.querySelector('header') as HTMLElement | null;
+                  const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+                  const top = element.getBoundingClientRect().top + window.scrollY;
+                  const desired = Math.max(0, top - headerHeight - 16);
+                  window.scrollTo({ top: desired, behavior: 'smooth' });
+                  return;
+                }
+                // fallback when not on the main page
+                window.location.href = '/#kontakt';
+              }}
               className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2 rounded-full hover:opacity-90 transition-opacity text-sm font-medium mb-4"
             >
               Jetzt Kontakt aufnehmen

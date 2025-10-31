@@ -5,12 +5,29 @@ import LiquidEther from "./LiquidEther";
 export function Hero() {
   const scrollToContact = () => {
     const element = document.getElementById("kontakt");
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      const headerEl = document.querySelector('header') as HTMLElement | null;
+      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      const desired = Math.max(0, top - headerHeight + 8);
+      window.scrollTo({ top: desired, behavior: 'smooth' });
+      return;
+    }
+    window.location.href = '/#kontakt';
   };
 
   const scrollToServices = () => {
     const element = document.getElementById("leistungen");
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (element) {
+      const headerEl = document.querySelector('header') as HTMLElement | null;
+      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      // smaller gap so the section starts a bit higher on screen
+      const desired = Math.max(0, top - headerHeight + 8);
+      window.scrollTo({ top: desired, behavior: 'smooth' });
+      return;
+    }
+    window.location.href = '/#leistungen';
   };
 
   return (
@@ -93,7 +110,7 @@ export function Hero() {
       <div className="container mx-auto text-center relative z-10">
         {/* Main Heading (HIER GEÄNDERT) */}
         <h1 className="text-5xl md:text-7xl mb-6 bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent max-w-4xl mx-auto leading-tight animate-fade-in-up-1">
-          We Build Digital Experiences.
+         Von der Vision zur Website
         </h1>
 
         {/* Subheading (HIER GEÄNDERT) */}
