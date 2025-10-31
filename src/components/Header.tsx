@@ -42,8 +42,7 @@ export function Header() {
           {/* Navigation */}
           {/* GEÄNDERT: gap-12 für gleichmäßigen, großen Abstand. */}
           <nav className="flex items-center gap-14 text-sm">
-            
-            {/* mr-8 entfernt */}
+            {/* Home */}
             <button
               onClick={() => scrollToSection("home")}
               className={`relative group pb-1 transition-all duration-300 ${
@@ -58,20 +57,7 @@ export function Header() {
               }`}></span>
             </button>
 
-            <button
-              onClick={() => scrollToSection("ablauf")}
-              className={`relative group pb-1 transition-all duration-300 ${
-                activeSection === "ablauf"
-                  ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold"
-                  : "text-slate-300 hover:text-white"
-              }`}
-            >
-              Ablauf
-              <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
-                activeSection === "ablauf" ? "w-full" : "w-0 group-hover:w-full"
-              }`}></span>
-            </button>
-
+            {/* Leistungen */}
             <a
               href="/#leistungen"
               onClick={(e) => {
@@ -90,6 +76,7 @@ export function Header() {
               }`}></span>
             </a>
 
+            {/* Über mich */}
             <a
               href="/#ueber-mich"
               onClick={(e) => {
@@ -105,6 +92,25 @@ export function Header() {
               Über mich
               <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
                 activeSection === "ueber-mich" ? "w-full" : "w-0 group-hover:w-full"
+              }`}></span>
+            </a>
+
+            {/* Ablauf */}
+            <a
+              href="/#ablauf"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("ablauf");
+              }}
+              className={`relative group pb-1 transition-all duration-300 ${
+                activeSection === "ablauf"
+                  ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Ablauf
+              <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
+                activeSection === "ablauf" ? "w-full" : "w-0 group-hover:w-full"
               }`}></span>
             </a>
 
