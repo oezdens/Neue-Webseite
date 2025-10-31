@@ -1,8 +1,14 @@
 import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
 /* ColorBends removed */
 import LiquidEther from "./LiquidEther";
 
 export function Hero() {
+  const [animateActive, setAnimateActive] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setAnimateActive(true), 20);
+    return () => clearTimeout(t);
+  }, []);
   const scrollToContact = () => {
     const element = document.getElementById("kontakt");
     if (element) {
@@ -35,53 +41,36 @@ export function Hero() {
       id="home"
       className="pt-32 pb-20 px-6 min-h-screen flex items-center relative overflow-hidden"
     >
-      {/* --- HIER GEÄNDERT: Neue Animation hinzugefügt --- */}
+      {/* Word slide-in animation: words slide in from left to right sequentially */}
       <style>
         {`
-          /* Scroll-Indikator Animation (unverändert) */
-          @keyframes scrollAnimation {
-            0% {
-              transform: translateY(0);
-              opacity: 1;
-            }
-            50% {
-              transform: translateY(20px);
-              opacity: 1;
-            }
-            100% {
-              transform: translateY(30px);
-              opacity: 0;
-            }
-          }
-          .animate-scroll-custom {
-            animation: scrollAnimation 2s infinite ease-in-out;
+          /* slide down from above */
+          @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to { opacity: 1; transform: translateY(0); }
           }
 
-          /* NEUE Animation für das "Öffnen" */
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
+          /* base hidden state for words/lines */
+          .word, .line { opacity: 0; transform: translateY(-18px); display: inline-block; }
+
+          /* when container has .animate-words we start the animation; use longhand so delays remain */
+          .animate-words .word,
+          .animate-words .line {
+            animation-name: slideInDown;
+            /* slower, smoother entrance */
+            animation-duration: 0.32s;
+            animation-timing-function: cubic-bezier(.2,.9,.25,1);
+            animation-fill-mode: both;
           }
 
-          /* Hilfsklassen für die Animation mit Verzögerung */
-          .animate-fade-in-up-1 {
-            opacity: 0; /* Standardmäßig unsichtbar */
-            animation: fadeInUp 0.8s ease-out 0.2s forwards; /* 0.2s Verzögerung */
-          }
-          .animate-fade-in-up-2 {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.4s forwards; /* 0.4s Verzögerung */
-          }
-          .animate-fade-in-up-3 {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.6s forwards; /* 0.6s Verzögerung */
-          }
+          /* staggered delays top->down (words first left→right, then lines) */
+          .delay-1 { animation-delay: 0s; }
+          .delay-2 { animation-delay: 0.16s; }
+          .delay-3 { animation-delay: 0.32s; }
+          .delay-4 { animation-delay: 0.48s; }
+          .delay-5 { animation-delay: 0.64s; }
+          .line-delay-6 { animation-delay: 0.88s; }
+          .line-delay-7 { animation-delay: 1.12s; }
         `}
       </style>
 
@@ -93,12 +82,9 @@ export function Hero() {
           cursorSize={100}
           isViscous={false}
           viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.5}
-          isBounce={false}
-          autoDemo={true}
           autoSpeed={0.25}
+                      /* start animations only after the container receives .reveal-active to avoid FOUC */
+                      /* animations are defined in the <style> block above and scoped to .reveal-active */
           autoIntensity={3}
           takeoverDuration={0.15}
           autoResumeDelay={500}
@@ -106,33 +92,63 @@ export function Hero() {
         />
       </div>
 
-      {/* Content (Dieser Container wird weiterhin zentriert) */}
-      <div className="container mx-auto text-center relative z-10">
+  {/* Content (Dieser Container wird weiterhin zentriert) */}
+  <div className={"container mx-auto text-center relative z-10 " + (animateActive ? 'animate-words' : '')}>
         {/* Main Heading (HIER GEÄNDERT) */}
-        <h1 className="text-5xl md:text-7xl mb-6 bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent max-w-4xl mx-auto leading-tight animate-fade-in-up-1">
-         Von der Vision zur Website
-        </h1>
+  <div className="relative max-w-4xl mx-auto mb-6">
+          {/* Elegant layered glow: colored soft gradient + subtle white rim behind the main heading */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 mx-auto text-5xl md:text-7xl leading-tight -z-20 pointer-events-none"
+            style={{
+              background: 'linear-gradient(90deg, rgba(130,87,229,0.18), rgba(255,121,198,0.14))',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+              opacity: 0.95,
+              transform: 'scale(1.02)'
+            }}
+          >
+            Von der Vision zur Website
+          </span>
 
-        {/* Subheading (HIER GEÄNDERT) */}
-        <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-in-up-2">
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 mx-auto text-5xl md:text-7xl leading-tight -z-10 pointer-events-none"
+            style={{
+              color: '#ffffff',
+              opacity: 0.12,
+              transform: 'scale(1.01)'
+            }}
+          >
+            Von der Vision zur Website
+          </span>
+
+          <h1 className="relative text-5xl md:text-7xl text-white leading-tight">
+            <span className="word delay-1">Von</span>{' '}
+            <span className="word delay-2">der</span>{' '}
+            <span className="word delay-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Vision</span>{' '}
+            <span className="word delay-4">zur</span>{' '}
+            <span className="word delay-5 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Website</span>
+          </h1>
+          {/* Subheading (HIER GEÄNDERT) */}
+    <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-6 line line-delay-6">
          Hochwertiges Webdesign und strategische Umsetzung für Ihren nachhaltigen Unternehmenserfolg
         </p>
 
-        {/* --- ANGEPASSTER BEREICH: CTA BUTTONS (HIER GEÄNDERT) --- */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12 animate-fade-in-up-3">
-          {/* Button 1: Meine Leistungen */}
+        {/* --- ANGEPASSTER BEREICH: CTA BUTTONS direkt unter dem Text (zentriert) --- */}
+        <div className="flex justify-center items-center mt-6 mb-12">
           <a
             href="#leistungen"
             onClick={(e) => {
               e.preventDefault();
               scrollToServices();
             }}
-            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium"
+            className="line line-delay-7 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium"
           >
             Meine Leistungen
           </a>
         </div>
-        {/* --- ENDE BUTTONS --- */}
+        </div>
       </div>
 
       {/* --- SCROLL-INDIKATOR (ABSOLUT POSITIONIERT) --- */}
@@ -150,7 +166,7 @@ export function Hero() {
         {/* Indikator-Behälter */}
         <div className="w-[25px] h-[45px] border-2 border-slate-200 rounded-full relative overflow-hidden">
           {/* Animierter Punkt */}
-          <div className="w-1.5 h-1.5 bg-slate-400 rounded-full absolute top-[5px] left-1/2 -translate-x-1/2 animate-scroll-custom"></div>
+            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full absolute top-[5px] left-1/2 -translate-x-1/2"></div>
         </div>
       </div>
       {/* --- ENDE SCROLL-INDIKATOR --- */}
