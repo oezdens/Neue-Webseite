@@ -316,3 +316,72 @@ html {
   /* HIER GEÄNDERT: Animation von 3s auf 2s beschleunigt */
   animation: animateGradient 2s linear infinite;
 }
+
+/* Custom scrollbar styled to match the site's purple->pink look */
+/* WebKit browsers (Chrome, Edge, Safari) */
+/* WebKit scrollbars (Chrome, Edge, Safari) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  /* gradient + solid fallback for browsers that ignore gradients */
+  background-image: linear-gradient(180deg, #7b2cff 0%, #ff79c6 100%);
+  background-color: #7b2cff !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.06) saturate(1.06);
+}
+
+/* Firefox: use solid-ish colors (no gradient support for scrollbar-color) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #7b2cff rgba(0,0,0,0.12);
+}
+
+/* Ensure scroll styling applies when the app root is the scroller (SPA patterns) */
+#root, #root * {
+  scrollbar-width: thin;
+  scrollbar-color: #7b2cff rgba(0,0,0,0.12);
+}
+
+/* Also target the root element for WebKit-based browsers */
+#root::-webkit-scrollbar, #root *::-webkit-scrollbar {
+  width: 12px;
+}
+#root::-webkit-scrollbar-track, #root *::-webkit-scrollbar-track {
+  background: transparent;
+}
+#root::-webkit-scrollbar-thumb, #root *::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background-image: linear-gradient(180deg, #7b2cff 0%, #ff79c6 100%);
+  background-color: #7b2cff !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+#root::-webkit-scrollbar-thumb:hover, #root *::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.06) saturate(1.06);
+}
+
+/* Respect reduced motion / accessibility: keep scrollbars simple */
+@media (prefers-reduced-motion: reduce) {
+  html::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
+    background-image: none;
+    background: #7b2cff;
+  }
+}

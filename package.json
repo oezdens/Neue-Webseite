@@ -46,6 +46,7 @@
             "sonner": "^2.0.3",
             "tailwind-merge": "*",
             "three": "^0.180.0",
+            "typescript": "^5.9.3",
             "vaul": "^1.1.2"
       },
       "devDependencies": {

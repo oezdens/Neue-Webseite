@@ -285,59 +285,7 @@ export function Barrierefreiheit() {
           </section>
 
           {/* Keyboard Shortcuts */}
-          <section style={sectionStyle}>
-            <h2 style={h2Style}>
-              <Keyboard style={iconStyle} />
-              Tastaturkürzel
-            </h2>
-            <p style={textStyle}>
-              Die folgenden Tastaturkürzel stehen auf unserer Website zur Verfügung:
-            </p>
-            <div style={{ display: 'grid', gap: '12px' }}>
-              <div style={featureBoxStyle}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#cbd5e1' }}>Navigation öffnen/schließen</span>
-                  <code style={{ 
-                    backgroundColor: '#1e293b', 
-                    padding: '4px 12px', 
-                    borderRadius: '6px',
-                    color: '#ec4899',
-                    fontSize: '14px',
-                  }}>
-                    Alt + N
-                  </code>
-                </div>
-              </div>
-              <div style={featureBoxStyle}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#cbd5e1' }}>Zum Hauptinhalt springen</span>
-                  <code style={{ 
-                    backgroundColor: '#1e293b', 
-                    padding: '4px 12px', 
-                    borderRadius: '6px',
-                    color: '#ec4899',
-                    fontSize: '14px',
-                  }}>
-                    Alt + M
-                  </code>
-                </div>
-              </div>
-              <div style={featureBoxStyle}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#cbd5e1' }}>Suche öffnen</span>
-                  <code style={{ 
-                    backgroundColor: '#1e293b', 
-                    padding: '4px 12px', 
-                    borderRadius: '6px',
-                    color: '#ec4899',
-                    fontSize: '14px',
-                  }}>
-                    Alt + S
-                  </code>
-                </div>
-              </div>
-            </div>
-          </section>
+          
 
           {/* Browser Compatibility */}
           <section style={sectionStyle}>
@@ -405,12 +353,7 @@ export function Barrierefreiheit() {
                 <strong style={{ color: '#ffffff' }}>Telefon:</strong>
                 <span style={{ color: '#cbd5e1', marginLeft: '8px' }}>+49 (0) 89 / 12 34 56 - 789</span>
               </div>
-              <div>
-                <strong style={{ color: '#ffffff' }}>Postanschrift:</strong>
-                <span style={{ color: '#cbd5e1', marginLeft: '8px' }}>
-                  Musterfirma GmbH, Musterstraße 123, 80333 München
-                </span>
-              </div>
+              
             </div>
             <p style={textStyle}>
               Wir bemühen uns, alle Anfragen innerhalb von 5 Werktagen zu beantworten.

@@ -157,7 +157,7 @@ export function Datenschutz() {
               <p style={{ color: '#cbd5e1', margin: 0 }}>
                 <strong style={{ color: '#ffffff' }}>Verantwortliche Stelle:</strong> Die 
                 verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist die 
-                Musterfirma GmbH. Weitere Informationen finden Sie im Impressum.
+                oezdens GbR. Weitere Informationen finden Sie im Impressum.
               </p>
             </div>
           </section>

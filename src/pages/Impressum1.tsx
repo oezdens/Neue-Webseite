@@ -161,16 +161,12 @@ export function Impressum() {
           <section style={sectionStyle}>
             <h2 style={h2Style}>Anbieter</h2>
             <div style={{ marginBottom: '12px' }}>
-              <p style={{ ...textStyle, fontSize: '18px' }}>Musterfirma GmbH</p>
-              <p style={textStyle}>Geschäftsführer: Max Mustermann</p>
-              <p style={{ ...textStyle, paddingTop: '16px' }}>
-                <span style={labelStyle}>Handelsregister:</span> HRB 12345
-              </p>
+              <p style={{ ...textStyle, fontSize: '18px' }}>oezdens GbR</p>
+              <p style={textStyle}>Geschäftsführer: Serhat Özden</p>
+          
+            
               <p style={textStyle}>
-                <span style={labelStyle}>Registergericht:</span> Amtsgericht München
-              </p>
-              <p style={textStyle}>
-                <span style={labelStyle}>USt-IdNr.:</span> DE123456789
+                <span style={labelStyle}>USt-IdNr.:</span> Kleingewerbetreibend, keine USt-IdNr. vorhanden
               </p>
             </div>
           </section>
@@ -184,8 +180,8 @@ export function Impressum() {
                   <MapPin style={{ width: '20px', height: '20px', color: '#ec4899' }} />
                 </div>
                 <div style={textStyle}>
-                  <p style={{ marginBottom: '4px' }}>Musterstraße 123</p>
-                  <p style={{ marginBottom: '4px' }}>80333 München</p>
+                  <p style={{ marginBottom: '4px' }}>Bodemstall 6</p>
+                  <p style={{ marginBottom: '4px' }}>74177 Bad Friedrichshall</p>
                   <p>Deutschland</p>
                 </div>
               </div>
@@ -225,9 +221,9 @@ export function Impressum() {
             <h2 style={h2Style}>Verantwortlich für den Inhalt</h2>
             <div style={textStyle}>
               <p style={{ marginBottom: '8px' }}>gemäß § 55 Abs. 2 RStV:</p>
-              <p style={{ paddingTop: '8px', marginBottom: '4px' }}>Max Mustermann</p>
-              <p style={{ marginBottom: '4px' }}>Musterstraße 123</p>
-              <p>80333 München</p>
+              <p style={{ paddingTop: '8px', marginBottom: '4px' }}>Serhat Özden</p>
+              <p style={{ marginBottom: '4px' }}>Bodemstall 6</p>
+              <p>74177 Bad Friedrichshall</p>
             </div>
           </section>
 
