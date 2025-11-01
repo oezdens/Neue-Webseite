@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer";
 import { CookieBanner } from "./components/CookieBanner";
 // New pages
 import AboutMe from "./components/AboutMe";
+import Preisuebersicht from "./components/Preisuebersicht";
 import { Impressum as Impressum1 } from "./pages/Impressum1";
 import { Datenschutz } from "./pages/Datenschutz";
 import { Barrierefreiheit } from "./pages/Barrierefreiheit";
@@ -50,6 +51,7 @@ export default function App() {
   {/* Desired order: Hero -> AboutMe -> ProcessAlternative -> Contact */}
   <AboutMe />
       <ProcessAlternative />
+  <Preisuebersicht />
       <Contact />
       <CookieBanner />
       <Footer />

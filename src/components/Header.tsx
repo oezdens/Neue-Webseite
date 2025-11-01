@@ -38,64 +38,136 @@ export function Header() {
   };
 
   // Scroll-spy: observe sections and update the active nav item as the user scrolls
+  // NOTE: some sections (like the dynamically added Preisübersicht) might not exist
+  // at header mount time. We attempt to observe any existing sections and use a
+  // MutationObserver to pick up elements that are added later so the nav becomes
+  // active when those sections scroll into view.
   useEffect(() => {
-    const ids = ["home", "leistungen", "ueber-mich", "ablauf", "kontakt"];
-    // Observer picks the section that's most visible in the viewport (center-biased)
+    const ids = ["home", "leistungen", "ueber-mich", "ablauf", "preise", "kontakt"];
+
     const observer = new IntersectionObserver(
       (entries) => {
-        // Prefer the entry with the largest intersectionRatio
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          const topId = visible[0].target.id;
-          setActiveSection((prev) => (prev === topId ? prev : topId));
-          return;
-        }
+        // If the Kontakt section is currently intersecting, prefer it immediately
+        // so 'Preise' won't stay underlined while the user is in the contact area.
+          const kontaktEntry = entries.find((e) => e.target.id === "kontakt" && e.isIntersecting);
+          if (kontaktEntry) {
+            setActiveSection("kontakt");
+            return;
+          }
 
-        // Fallback: if none are intersecting, pick the one closest to the viewport top
-        const sortedByDistance = entries
-          .slice()
-          .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top));
-        if (sortedByDistance.length) {
-          const nearestId = sortedByDistance[0].target.id;
-          setActiveSection((prev) => (prev === nearestId ? prev : nearestId));
-        }
+          const visible = entries.filter((e) => e.isIntersecting);
+          if (visible.length > 0) {
+            visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+            const topId = visible[0].target.id;
+            setActiveSection(topId);
+            return;
+          }
+
+          const sortedByDistance = entries
+            .slice()
+            .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top));
+          if (sortedByDistance.length) {
+            const nearestId = sortedByDistance[0].target.id;
+            setActiveSection(nearestId);
+          }
       },
       {
         root: null,
-        // Trigger when section is around the middle of the viewport
         rootMargin: "-40% 0px -40% 0px",
         threshold: [0, 0.25, 0.5, 0.75, 1],
       }
     );
 
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    const observed = new Set<string>();
+    const observeAll = () => {
+      ids.forEach((id) => {
+        if (!observed.has(id)) {
+          const el = document.getElementById(id);
+          if (el) {
+            observer.observe(el);
+            observed.add(id);
+          }
+        }
+      });
+    };
 
-    return () => observer.disconnect();
+    // initial attempt to observe elements that are already in the DOM
+    observeAll();
+
+    // Watch for new elements being added (e.g., Preisuebersicht rendered after Header)
+    const mo = new MutationObserver(() => {
+      observeAll();
+      // once we've observed all ids we can stop watching mutations
+      if (observed.size === ids.length) mo.disconnect();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   // Ensure the top-of-page selects `home` immediately when scrolled all the way up.
   // This complements the IntersectionObserver (which can sometimes not fire at exact top)
   useEffect(() => {
     let ticking = false;
+    const ids = ["home", "leistungen", "ueber-mich", "ablauf", "preise", "kontakt"];
+
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        // If we're very near the top, mark `home` as active
-        if (window.scrollY <= 72) {
-          setActiveSection((prev) => (prev === "home" ? prev : "home"));
+        try {
+          // If we're very near the top, mark `home` as active
+          if (window.scrollY <= 72) {
+            setActiveSection("home");
+            ticking = false;
+            return;
+          }
+
+          // Prefer Kontakt if it's visible at all
+          const kontaktEl = document.getElementById("kontakt");
+          if (kontaktEl) {
+            const kr = kontaktEl.getBoundingClientRect();
+            if (kr.top < window.innerHeight && kr.bottom > 0) {
+              setActiveSection("kontakt");
+              ticking = false;
+              return;
+            }
+          }
+
+          // Otherwise, pick the section whose TOP is closest to a point just under the header
+          const headerEl = document.querySelector("header") as HTMLElement | null;
+          const headerHeight = headerEl ? headerEl.offsetHeight : 96;
+          const desiredTop = headerHeight + 24;
+
+          let bestId: string | null = null;
+          let bestDistance = Infinity;
+
+          ids.forEach((id) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+            const distance = Math.abs(rect.top - desiredTop);
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              bestId = id;
+            }
+          });
+
+          if (bestId) setActiveSection(bestId);
+        } catch (err) {
+          // ignore
         }
         ticking = false;
       });
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    // run once on mount to set correct state if already at top
-    if (window.scrollY <= 72) setActiveSection("home");
+    // run once on mount to set correct state
+    onScroll();
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -213,6 +285,25 @@ export function Header() {
               Ablauf
               <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
                 activeSection === "ablauf" ? "w-full" : "w-0 group-hover:w-full"
+              }`}></span>
+            </a>
+
+            {/* Preise */}
+            <a
+              href="/#preise"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("preise");
+              }}
+              className={`relative group pb-1 transition-all duration-300 ${
+                activeSection === "preise"
+                  ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold"
+                  : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Preise
+              <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
+                activeSection === "preise" ? "w-full" : "w-0 group-hover:w-full"
               }`}></span>
             </a>
 
