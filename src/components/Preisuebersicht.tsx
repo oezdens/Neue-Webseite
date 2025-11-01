@@ -410,15 +410,44 @@ export default function Preisuebersicht() {
                     </div>
 
                     {/* CTA Button */}
-                    <button style={{
-                      width: '100%',
-                      position: 'relative',
-                      padding: '0.75rem 1.5rem',
-                      borderRadius: '9999px',
-                      overflow: 'hidden',
-                      border: pkg.highlighted ? 'none' : '2px solid #334155',
-                      cursor: 'pointer'
-                    }}>
+                    <button
+                      onClick={() => {
+                        const element = document.getElementById("kontakt");
+                        if (element) {
+                          const headerEl = document.querySelector('header') as HTMLElement | null;
+                          const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+                          const top = element.getBoundingClientRect().top + window.scrollY;
+                          const desired = Math.max(0, top - headerHeight - 16);
+                          window.scrollTo({ top: desired, behavior: 'smooth' });
+                          return;
+                        }
+                        window.location.href = '/#kontakt';
+                      }}
+                      onMouseEnter={(e) => {
+                        if (pkg.highlighted) return;
+                        const btn = e.currentTarget as HTMLButtonElement;
+                        btn.style.borderColor = 'rgba(168,85,247,0.9)';
+                        const span = btn.querySelector('span');
+                        if (span) (span as HTMLElement).style.color = 'white';
+                      }}
+                      onMouseLeave={(e) => {
+                        if (pkg.highlighted) return;
+                        const btn = e.currentTarget as HTMLButtonElement;
+                        btn.style.borderColor = '#334155';
+                        const span = btn.querySelector('span');
+                        if (span) (span as HTMLElement).style.color = '#cbd5e1';
+                      }}
+                      style={{
+                        width: '100%',
+                        position: 'relative',
+                        padding: '0.75rem 1.5rem',
+                        borderRadius: '9999px',
+                        overflow: 'hidden',
+                        border: pkg.highlighted ? 'none' : '2px solid #334155',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
                       {pkg.highlighted ? (
                         <>
                           <div style={{
