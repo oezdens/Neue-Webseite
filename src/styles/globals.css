@@ -385,3 +385,25 @@ body::-webkit-scrollbar-thumb:hover,
     background: #7b2cff;
   }
 }
+
+/* FORCE purple focus/invalid outline for inputs/textareas to override browser defaults */
+input:focus,
+textarea:focus,
+input:focus-visible,
+textarea:focus-visible {
+  outline: none !important;
+  border-color: #7b2cff !important; /* purple */
+  box-shadow: 0 0 0 4px rgba(123, 44, 255, 0.18) !important;
+}
+
+input:invalid,
+textarea:invalid {
+  border-color: #7b2cff !important;
+  box-shadow: 0 0 0 3px rgba(123, 44, 255, 0.12) !important;
+}
+
+input:invalid:focus,
+textarea:invalid:focus {
+  border-color: #7b2cff !important;
+  box-shadow: 0 0 0 4px rgba(123, 44, 255, 0.24) !important;
+}

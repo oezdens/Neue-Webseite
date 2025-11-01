@@ -29,25 +29,27 @@ export function Contact() {
           <div className="space-y-6">
             <Card className="bg-slate-900/50 border-purple-500/20">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-400 rounded-lg flex items-center justify-center mb-2">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <CardTitle className="text-white">E-Mail</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-400">oezdens.web@outlook.de</p>
-              </CardContent>
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center mb-2 shadow-lg ring-1 ring-purple-600/20">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-white">E-Mail</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <a href="mailto:oezdens.web@outlook.de" className="text-slate-300 underline-offset-2 hover:text-white hover:underline">
+                    oezdens.web@outlook.de
+                  </a>
+                </CardContent>
             </Card>
 
         
 
             <Card className="bg-slate-900/50 border-purple-500/20">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-400 rounded-lg flex items-center justify-center mb-2">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <CardTitle className="text-white">Standort</CardTitle>
-              </CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center mb-2 shadow-lg ring-1 ring-purple-600/20">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-white">Standort</CardTitle>
+                </CardHeader>
               <CardContent>
                 <p className="text-slate-400">Heilbronn, Deutschland</p>
               </CardContent>
@@ -71,7 +73,17 @@ export function Contact() {
                         id="name"
                         placeholder="Ihr Name"
                         required
-                        className="bg-slate-800/50 border-purple-500/20 text-white placeholder:text-slate-500 focus:border-purple-500/50"
+                        className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
+                        onFocus={(e) => {
+                          const t = e.currentTarget as HTMLInputElement;
+                          t.style.borderColor = '#7b2cff';
+                          t.style.boxShadow = '0 0 0 4px rgba(123,44,255,0.18)';
+                        }}
+                        onBlur={(e) => {
+                          const t = e.currentTarget as HTMLInputElement;
+                          t.style.borderColor = '';
+                          t.style.boxShadow = '';
+                        }}
                       />
                     </div>
                     <div className="space-y-2">
@@ -83,7 +95,17 @@ export function Contact() {
                         type="email"
                         placeholder="ihre@email.de"
                         required
-                        className="bg-slate-800/50 border-purple-500/20 text-white placeholder:text-slate-500 focus:border-purple-500/50"
+                        className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
+                        onFocus={(e) => {
+                          const t = e.currentTarget as HTMLInputElement;
+                          t.style.borderColor = '#7b2cff';
+                          t.style.boxShadow = '0 0 0 4px rgba(123,44,255,0.18)';
+                        }}
+                        onBlur={(e) => {
+                          const t = e.currentTarget as HTMLInputElement;
+                          t.style.borderColor = '';
+                          t.style.boxShadow = '';
+                        }}
                       />
                     </div>
                   </div>
@@ -96,7 +118,17 @@ export function Contact() {
                       id="subject"
                       placeholder="Worum geht es?"
                       required
-                      className="bg-slate-800/50 border-purple-500/20 text-white placeholder:text-slate-500 focus:border-purple-500/50"
+                      className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
+                      onFocus={(e) => {
+                        const t = e.currentTarget as HTMLInputElement;
+                        t.style.borderColor = '#7b2cff';
+                        t.style.boxShadow = '0 0 0 4px rgba(123,44,255,0.18)';
+                      }}
+                      onBlur={(e) => {
+                        const t = e.currentTarget as HTMLInputElement;
+                        t.style.borderColor = '';
+                        t.style.boxShadow = '';
+                      }}
                     />
                   </div>
 
@@ -109,15 +141,25 @@ export function Contact() {
                       placeholder="Erzählen Sie mir von Ihrem Projekt..."
                       required
                       rows={6}
-                      className="bg-slate-800/50 border-purple-500/20 text-white placeholder:text-slate-500 focus:border-purple-500/50"
+                      className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
+                      onFocus={(e) => {
+                        const t = e.currentTarget as HTMLTextAreaElement;
+                        t.style.borderColor = '#7b2cff';
+                        t.style.boxShadow = '0 0 0 4px rgba(123,44,255,0.18)';
+                      }}
+                      onBlur={(e) => {
+                        const t = e.currentTarget as HTMLTextAreaElement;
+                        t.style.borderColor = '';
+                        t.style.boxShadow = '';
+                      }}
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 border-0"
+                    className="w-full rounded-lg py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 border-0 text-white font-semibold shadow-xl transform transition-all duration-150 hover:-translate-y-1"
                   >
-                    <Send className="w-4 h-4 mr-2" />
+                    <Send className="w-4 h-4 mr-2 text-white" />
                     Nachricht senden
                   </Button>
                 </form>
