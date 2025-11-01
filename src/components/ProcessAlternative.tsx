@@ -5,21 +5,21 @@ export default function ProcessAlternative() {
     {
       number: "01",
       title: "Kostenloses Gespräch",
-      description: "Erzähle uns von deiner Vision und deinen Zielen für deine Webseite.",
+      description: "Erzähle mir von deiner Vision und deinen Zielen für deine Webseite.",
       icon: MessageCircle,
       features: ["30 Min. Beratung", "Unverbindlich", "Individuelle Strategie"],
     },
     {
       number: "02",
       title: "Kostenloser Entwurf",
-      description: "Wir erstellen einen maßgeschneiderten Entwurf, der deine Marke perfekt repräsentiert.",
+      description: "Ich erstelle einen maßgeschneiderten Entwurf, der deine Marke perfekt repräsentiert.",
       icon: Palette,
       features: ["Design-Konzept", "2 Revisionen", "Responsive Layout"],
     },
     {
       number: "03",
       title: "Feinschliff & Go-Live",
-     
+     description: "Ich kümmere mich um die Details und bringe deine neue Website online.",
       icon: Rocket,
       features: ["Finalisierung", "Testing", "Launch Support"],
     },

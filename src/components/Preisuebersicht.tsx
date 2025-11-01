@@ -5,7 +5,7 @@ export default function Preisuebersicht() {
     {
       name: "Standard Webseite",
       price: "299€",
-      originalPrice: "598€",
+      originalPrice: "599€",
       description: "Perfekt für kleine Unternehmen und Start-ups",
       features: [
         "Bis zu 6 Seiten",
@@ -21,14 +21,14 @@ export default function Preisuebersicht() {
     {
       name: "Business Webseite",
       price: "499€",
-      originalPrice: "998€",
+      originalPrice: "999€",
       description: "Für wachsende Unternehmen mit erweiterten Anforderungen",
       features: [
         "Bis zu 15 Seiten",
         "Premium Design",
         "CMS Integration",
         "Erweiterte SEO",
-        "6 Monate Support",
+        "2 Monate Support",
         "Analytics Dashboard",
         "Newsletter Integration"
       ],
