@@ -1,9 +1,8 @@
-import { Code2, Github, Linkedin, Mail } from "lucide-react"; // Icons für Social Media
+import { Code2, Linkedin, Mail } from "lucide-react"; // Icons für Social Media
 
 const socialLinks = [
-  { icon: Github, href: "#", name: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/serhat-%C3%B6zden-958130361/", name: "LinkedIn", target: '_blank', rel: 'noopener noreferrer' },
-  { icon: Mail, href: "#", name: "Email" },
+  { icon: Mail, href: "mailto:oezdens.web@outlook.de", name: "Email" },
 ];
 
 export function Footer() {
