@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import ChatBotCTA from "./ChatBotCTA";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -170,6 +171,10 @@ export function Contact() {
 
         
       </div>
+      {/* ChatBot floating widget (can be removed by deleting src/components/ChatBotCTA.tsx and this import) */}
+      <ChatBotCTA />
     </section>
   );
 }
+
+// ChatBotCTA is injected above in the DOM so it can float over the Contact section.
