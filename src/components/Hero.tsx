@@ -171,11 +171,21 @@ export function Hero() {
 
       {/* --- SCROLL-INDIKATOR (ABSOLUT POSITIONIERT) --- */}
       <div
+        onClick={() => scrollToServices()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            scrollToServices();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Zum Abschnitt Leistungen scrollen"
         className="
           absolute z-10 
           bottom-10           
           left-1/2 -translate-x-1/2 
-          flex flex-col items-center"
+          flex flex-col items-center cursor-pointer"
       >
         {/* Text */}
         <p className="text-slate-200 text-lg mb-3">
@@ -184,7 +194,7 @@ export function Hero() {
         {/* Indikator-Behälter */}
         <div className="w-[25px] h-[45px] border-2 border-slate-200 rounded-full relative overflow-hidden">
           {/* Animierter Punkt */}
-            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full absolute top-[5px] left-1/2 -translate-x-1/2 scroll-dot"></div>
+            <div style={{ backgroundColor: '#7b2cff' }} className="w-1.5 h-1.5 rounded-full absolute top-[5px] left-1/2 -translate-x-1/2 scroll-dot" />
         </div>
       </div>
       {/* --- ENDE SCROLL-INDIKATOR --- */}

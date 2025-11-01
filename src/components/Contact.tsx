@@ -24,10 +24,10 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
           {/* Contact Info Cards */}
-          <div className="space-y-6">
-            <Card className="bg-slate-900/50 border-purple-500/20">
+          <div className="h-full flex flex-col justify-between">
+            <Card className="bg-slate-900/50 border-purple-500/20 p-6 md:p-8 min-h-[220px] md:min-h-[360px]">
               <CardHeader>
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center mb-2 shadow-lg ring-1 ring-purple-600/20">
                     <Mail className="w-6 h-6 text-white" />
@@ -43,7 +43,7 @@ export function Contact() {
 
         
 
-            <Card className="bg-slate-900/50 border-purple-500/20">
+            <Card className="bg-slate-900/50 border-purple-500/20 p-6 md:p-8 min-h-[220px] md:min-h-[360px]">
               <CardHeader>
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center mb-2 shadow-lg ring-1 ring-purple-600/20">
                     <MapPin className="w-6 h-6 text-white" />
@@ -58,7 +58,7 @@ export function Contact() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="bg-slate-900/50 border-purple-500/20">
+            <Card className="bg-slate-900/50 border-purple-500/20 p-6 md:p-8 min-h-[220px] md:min-h-[360px] h-full">
               <CardHeader>
                 <CardTitle className="text-white">Nachricht senden</CardTitle>
               </CardHeader>
