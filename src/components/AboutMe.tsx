@@ -157,7 +157,7 @@ export default function AboutMe() {
                   </h1>
                   
                   <p className="text-lg text-slate-400 leading-relaxed mb-6">
-                 Als studierter Informatiker mit über 9 Jahren Berufserfahrung und hauptberuflichem Teamleiter verbinde ich fundiertes technisches Know-how in Apps, Automation und KI mit der Kreativität eines leidenschaftlichen Webentwicklers, um Ihre digitalen Visionen in maßgeschneiderte, hervorragend funktionierende Webseiten umzusetzen, die garantiert 50% günstiger sind als Agenturen.
+                 Als studierter Informatiker mit über 9 Jahren Berufserfahrung und hauptberuflichem Teamleiter verbinde ich fundiertes technisches Know-how in Apps, Automation und KI mit der Kreativität eines leidenschaftlichen Webentwicklers. Mein Ziel ist es, Ihre digitalen Visionen in maßgeschneiderte, hervorragend funktionierende Webseiten umzusetzen, die durch meine effiziente Solo-Struktur wesentlich budgetschonender realisiert werden können als bei einer Agentur.
                   </p>
 
                   <p className="text-lg text-slate-500">
