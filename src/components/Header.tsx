@@ -37,8 +37,101 @@ export function Header() {
     }
   };
 
+  // Scroll-spy: observe sections and update the active nav item as the user scrolls
+  useEffect(() => {
+    const ids = ["home", "leistungen", "ueber-mich", "ablauf", "kontakt"];
+    // Observer picks the section that's most visible in the viewport (center-biased)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Prefer the entry with the largest intersectionRatio
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) {
+          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          const topId = visible[0].target.id;
+          setActiveSection((prev) => (prev === topId ? prev : topId));
+          return;
+        }
+
+        // Fallback: if none are intersecting, pick the one closest to the viewport top
+        const sortedByDistance = entries
+          .slice()
+          .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top));
+        if (sortedByDistance.length) {
+          const nearestId = sortedByDistance[0].target.id;
+          setActiveSection((prev) => (prev === nearestId ? prev : nearestId));
+        }
+      },
+      {
+        root: null,
+        // Trigger when section is around the middle of the viewport
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Ensure the top-of-page selects `home` immediately when scrolled all the way up.
+  // This complements the IntersectionObserver (which can sometimes not fire at exact top)
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        // If we're very near the top, mark `home` as active
+        if (window.scrollY <= 72) {
+          setActiveSection((prev) => (prev === "home" ? prev : "home"));
+        }
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // run once on mount to set correct state if already at top
+    if (window.scrollY <= 72) setActiveSection("home");
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex justify-center items-center py-4 bg-transparent">
+      {/* Small local styles for the header blink effect when Kontakt is active */}
+      <style>
+        {`@keyframes blinkPulse {
+            0% {
+              transform: translateY(0) scale(1);
+              opacity: 1;
+              box-shadow: 0 0 0 rgba(0,0,0,0);
+              filter: none;
+            }
+            50% {
+              /* gentler movement and glow */
+              transform: translateY(-2px) scale(1.02);
+              opacity: 0.98;
+              box-shadow: 0 8px 20px rgba(99,102,241,0.12), 0 2px 6px rgba(99,102,241,0.04);
+              filter: drop-shadow(0 6px 12px rgba(99,102,241,0.06));
+            }
+            100% {
+              transform: translateY(0) scale(1);
+              opacity: 1;
+              box-shadow: 0 0 0 rgba(0,0,0,0);
+              filter: none;
+            }
+          }
+          .blink {
+            animation: blinkPulse 1.3s cubic-bezier(.2,.9,.25,1) infinite;
+            will-change: transform, box-shadow, opacity;
+          }
+          @media (prefers-reduced-motion: reduce) { .blink { animation: none; transform: none; box-shadow: none; } }
+        `}
+      </style>
       <div className="w-[98%] max-w-7xl bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-8 py-3.5 shadow-xl flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2" aria-label="Startseite">
@@ -130,7 +223,9 @@ export function Header() {
                 e.preventDefault();
                 scrollToSection("kontakt");
               }}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-1.5 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium"
+              className={`bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-1.5 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium ${
+                activeSection === "kontakt" ? "blink" : ""
+              }`}
               aria-label="Kontakt"
             >
               Kontakt

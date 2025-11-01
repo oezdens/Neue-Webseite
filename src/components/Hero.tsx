@@ -58,9 +58,27 @@ export function Hero() {
           .animate-words .line {
             animation-name: slideInDown;
             /* slower, smoother entrance */
-            animation-duration: 0.32s;
+            /* increased duration to slow the reveal as requested */
+            animation-duration: 0.6s;
             animation-timing-function: cubic-bezier(.2,.9,.25,1);
             animation-fill-mode: both;
+          }
+
+          /* scroll indicator dot: gentle down/up loop */
+          @keyframes scrollDot {
+            0% { top: 5px; opacity: 1; }
+            50% { top: 24px; opacity: 0.6; }
+            100% { top: 5px; opacity: 1; }
+          }
+
+          .scroll-dot {
+            animation: scrollDot 1.6s ease-in-out infinite;
+          }
+
+          /* respect reduced motion preferences */
+          @media (prefers-reduced-motion: reduce) {
+            .scroll-dot { animation: none; }
+            .animate-words .word, .animate-words .line { animation: none; opacity: 1; transform: none; }
           }
 
           /* staggered delays top->down (words first left→right, then lines) */
@@ -166,7 +184,7 @@ export function Hero() {
         {/* Indikator-Behälter */}
         <div className="w-[25px] h-[45px] border-2 border-slate-200 rounded-full relative overflow-hidden">
           {/* Animierter Punkt */}
-            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full absolute top-[5px] left-1/2 -translate-x-1/2"></div>
+            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full absolute top-[5px] left-1/2 -translate-x-1/2 scroll-dot"></div>
         </div>
       </div>
       {/* --- ENDE SCROLL-INDIKATOR --- */}

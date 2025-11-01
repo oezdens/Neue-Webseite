@@ -17,7 +17,7 @@ export function Contact() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl mb-4 bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent">
-            Kontakt aufnehmen
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Kontakt</span> aufnehmen
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Haben Sie ein Projekt im Kopf? Lassen Sie uns darüber sprechen!

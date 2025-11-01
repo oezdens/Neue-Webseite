@@ -60,8 +60,7 @@ export default function AboutMe() {
       const headerEl = document.querySelector('header') as HTMLElement | null;
       const headerHeight = headerEl ? headerEl.offsetHeight : 120;
       const top = element.getBoundingClientRect().top + window.scrollY;
-      // smaller gap than default so the section appears a bit higher (closer to header)
-      const desired = Math.max(0, top - headerHeight + 8);
+      const desired = Math.max(0, top - headerHeight - 16);
       window.scrollTo({ top: desired, behavior: 'smooth' });
       return;
     }
