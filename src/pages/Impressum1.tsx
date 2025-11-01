@@ -205,12 +205,12 @@ export function Impressum() {
                   <Mail style={{ width: '20px', height: '20px', color: '#ec4899' }} />
                 </div>
                 <a 
-                  href="mailto:info@musterfirma.de" 
+                  href="mailto:oezdens.web@outlook.de" 
                   style={linkStyle}
                   onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
                   onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
                 >
-                  info@musterfirma.de
+                  oezdens.web@outlook.de
                 </a>
               </div>
             </div>
@@ -297,7 +297,7 @@ export function Impressum() {
 
         {/* Footer Note */}
         <div style={footerStyle}>
-          <p>Stand: Oktober 2024</p>
+          <p>Stand: Oktober 2025</p>
         </div>
       </div>
     </div>

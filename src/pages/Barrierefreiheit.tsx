@@ -345,8 +345,8 @@ export function Barrierefreiheit() {
             <div style={highlightBoxStyle}>
               <div style={{ marginBottom: '12px' }}>
                 <strong style={{ color: '#ffffff' }}>E-Mail:</strong>
-                <a href="mailto:barrierefreiheit@musterfirma.de" style={{ ...linkStyle, marginLeft: '8px' }}>
-                  barrierefreiheit@musterfirma.de
+                <a href="mailto:oezdens.web@outlook.de" style={{ ...linkStyle, marginLeft: '8px' }}>
+                  oezdens.web@outlook.de
                 </a>
               </div>
               <div style={{ marginBottom: '12px' }}>
@@ -390,7 +390,7 @@ export function Barrierefreiheit() {
 
         {/* Footer Note */}
         <div style={footerStyle}>
-          <p>Stand: Oktober 2024 | Letzte Überprüfung: Oktober 2024</p>
+          <p>Stand: Oktober 2025 | Letzte Überprüfung: Oktober 2025</p>
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ export function Contact() {
                 <CardTitle className="text-white">E-Mail</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-400">info@webdev-pro.de</p>
+                <p className="text-slate-400">oezdens.web@outlook.de</p>
               </CardContent>
             </Card>
 

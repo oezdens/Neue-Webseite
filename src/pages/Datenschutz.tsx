@@ -331,8 +331,8 @@ export function Datenschutz() {
             <div style={highlightBoxStyle}>
               <p style={{ color: '#cbd5e1', margin: 0 }}>
                 <strong style={{ color: '#ffffff' }}>Kontakt:</strong> Für Fragen zum Datenschutz 
-                wenden Sie sich bitte an: <a href="mailto:datenschutz@musterfirma.de" style={linkStyle}>
-                  datenschutz@musterfirma.de
+                wenden Sie sich bitte an: <a href="mailto:oezdens.web@outlook.de" style={linkStyle}>
+                  oezdens.web@outlook.de
                 </a>
               </p>
             </div>
@@ -370,7 +370,7 @@ export function Datenschutz() {
 
         {/* Footer Note */}
         <div style={footerStyle}>
-          <p>Stand: Oktober 2024</p>
+          <p>Stand: Oktober 2025</p>
         </div>
       </div>
     </div>
