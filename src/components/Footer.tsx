@@ -36,6 +36,63 @@ export function Footer() {
               <li><a href="#home" className="text-slate-400 hover:text-purple-400 transition-colors">Home</a></li>
               <li><a href="#leistungen" className="text-slate-400 hover:text-purple-400 transition-colors">Leistungen</a></li>
               <li><a href="#ueber-mich" className="text-slate-400 hover:text-purple-400 transition-colors">Über mich</a></li>
+              <li>
+                <a
+                  href="/#ablauf"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.getElementById("ablauf");
+                    if (element) {
+                      const headerEl = document.querySelector('header') as HTMLElement | null;
+                      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+                      const top = element.getBoundingClientRect().top + window.scrollY;
+                      const desired = Math.max(0, top - headerHeight - 16);
+                      window.scrollTo({ top: desired, behavior: 'smooth' });
+                      return;
+                    }
+                    window.location.href = '/#ablauf';
+                  }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Ablauf</a>
+              </li>
+              <li>
+                <a
+                  href="/#preise"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.getElementById("preise");
+                    if (element) {
+                      const headerEl = document.querySelector('header') as HTMLElement | null;
+                      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+                      const top = element.getBoundingClientRect().top + window.scrollY;
+                      const desired = Math.max(0, top - headerHeight - 16);
+                      window.scrollTo({ top: desired, behavior: 'smooth' });
+                      return;
+                    }
+                    window.location.href = '/#preise';
+                  }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Preise</a>
+              </li>
+              <li>
+                <a
+                  href="/#kontakt"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.getElementById("kontakt");
+                    if (element) {
+                      const headerEl = document.querySelector('header') as HTMLElement | null;
+                      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+                      const top = element.getBoundingClientRect().top + window.scrollY;
+                      const desired = Math.max(0, top - headerHeight - 16);
+                      window.scrollTo({ top: desired, behavior: 'smooth' });
+                      return;
+                    }
+                    window.location.href = '/#kontakt';
+                  }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Kontakt</a>
+              </li>
             </ul>
           </div>
 
@@ -43,9 +100,27 @@ export function Footer() {
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-semibold text-white mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">UI/UX Design</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">Front-end Development</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-purple-400 transition-colors">SEO Optimierung</a></li>
+              <li>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >UI/UX Design</a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Front-end Development</a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >SEO Optimierung</a>
+              </li>
             </ul>
           </div>
 
