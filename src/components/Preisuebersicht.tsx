@@ -35,6 +35,19 @@ export default function Preisuebersicht() {
     }
   ];
 
+  const scrollToKontakt = () => {
+    const element = document.getElementById("kontakt");
+    if (element) {
+      const headerEl = document.querySelector('header') as HTMLElement | null;
+      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      const desired = Math.max(0, top - headerHeight - 16);
+      window.scrollTo({ top: desired, behavior: 'smooth' });
+      return;
+    }
+    window.location.href = '/#kontakt';
+  };
+
   return (
     <>
       <style>{`
@@ -455,7 +468,8 @@ export default function Preisuebersicht() {
                             inset: 0,
                             background: 'linear-gradient(to right, #9333ea, #ec4899, #9333ea)',
                             backgroundSize: '200% 100%',
-                            animation: 'pricing-gradient-xy 3s ease infinite'
+                            animation: 'pricing-gradient-xy 3s ease infinite',
+                            pointerEvents: 'none'
                           }} />
                           <span style={{
                             position: 'relative',
