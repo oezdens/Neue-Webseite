@@ -13,7 +13,8 @@ export default function Preisuebersicht() {
         "Kontaktformular",
         "SEO-Optimierung",
         "1 Monat Support",
-        "Social Media Integration"
+        "Social Media Integration",
+        "Logo Erstellung"
       ],
       highlighted: true
     },
@@ -180,7 +181,7 @@ export default function Preisuebersicht() {
                 maxWidth: '42rem',
                 margin: '0 auto'
               }}>
-                Faire Preise. Keine versteckten Kosten.
+                Ich lege die Karten auf den Tisch. Fair und ohne Haken.
               </p>
             </div>
 
@@ -508,6 +509,11 @@ export default function Preisuebersicht() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Matching reassurance line similar to ProcessAlternative */}
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <p style={{ color: '#94a3b8', fontSize: '0. nine rem' }}>✓ Gratis-Leistung: Von der Logo-Erstellung bis zur finalen Animation – alle Design-Extras sind ohne Aufpreis enthalten.</p>
             </div>
           </div>
         </div>
