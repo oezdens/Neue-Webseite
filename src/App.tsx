@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Header } from "./components/Header";
 import { Helmet } from "react-helmet-async";
 import { Hero } from "./components/Hero";
@@ -15,6 +16,37 @@ import { Barrierefreiheit } from "./pages/Barrierefreiheit";
 export default function App() {
   const defaultTitle = "oezdens — Webentwicklung & IT";
   const defaultDescription = "Professionelle Webentwicklung & IT-Services — moderne Websites, Barrierefreiheit und transparente Preise.";
+
+  // Scroll to section on initial page load based on URL path
+  useEffect(() => {
+    const path = window.location.pathname;
+    const pathToSectionId: { [key: string]: string } = {
+      "/Startseite": "home",
+      "/leistungen": "leistungen",
+      "/ueber-mich": "ueber-mich",
+      "/ablauf": "ablauf",
+      "/preise": "preise",
+      "/kontakt": "kontakt",
+    };
+
+    const sectionId = pathToSectionId[path];
+    if (sectionId) {
+      // Wait for DOM to be ready
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerEl = document.querySelector("header") as HTMLElement | null;
+          const headerHeight = headerEl ? headerEl.offsetHeight : 120;
+          const top = element.getBoundingClientRect().top + window.scrollY;
+          const desired = sectionId === "kontakt" 
+            ? Math.max(0, top - headerHeight + 8) 
+            : Math.max(0, top - headerHeight - 16);
+          
+          window.scrollTo({ top: desired, behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, []);
 
   const head = (
     <Helmet>
