@@ -13,8 +13,8 @@ export function Footer() {
     <footer className="bg-slate-950/80 backdrop-blur-md border-t border-purple-500/20 mt-20 pt-12 pb-6">
   <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
 
-        {/* Horizontal footer: force 4 blocks side-by-side; allow proportional shrinking */}
-        <div className="flex gap-8 flex-nowrap justify-between items-start">
+        {/* Footer Content: 4 Spalten */}
+        <div className="flex flex-col sm:flex-row gap-8 flex-wrap sm:flex-nowrap justify-between items-start">
           
           {/* Spalte 1: Branding & Logo */}
           <div className="flex-1 min-w-0">
@@ -159,9 +159,9 @@ export function Footer() {
         <hr className="my-8 border-purple-500/10" />
 
         {/* Copyright Sektion */}
-        <div className="flex justify-between items-center text-sm text-slate-500">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-slate-500 gap-3">
           <p>&copy; {currentYear} oezdens. Alle Rechte vorbehalten.</p>
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap sm:space-x-4 gap-2 sm:gap-0 items-center justify-center">
             <a href="/impressum" className="hover:text-purple-400 transition-colors">Impressum</a>
             <a href="/datenschutz" className="hover:text-purple-400 transition-colors">Datenschutz</a>
             <a href="/barrierefreiheit" className="hover:text-purple-400 transition-colors">Barrierefreiheit</a>

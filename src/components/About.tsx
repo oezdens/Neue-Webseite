@@ -47,37 +47,37 @@ export function About() {
           {/* Right Column - Stats Cards */}
           <div className="grid grid-cols-2 gap-6 [perspective:1000px]">
             {/* MODIFIZIERT: Umfassendere Animationen und Icons */}
-            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-600/20 to-purple-500/20 border border-purple-500/30 transition-all duration-500 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-3xl hover:shadow-purple-500/40 hover:border-purple-500/80 [transform-style:preserve-3d] hover:rotate-x-3">
+            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-600/20 to-purple-500/20 border border-purple-500/30 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-lg hover:border-purple-500/80 [transform-style:preserve-3d]">
               <div className="absolute inset-0 bg-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 group-hover:animate-pulse-slow z-0"></div>
               <CardContent className="pt-6 text-center relative z-10">
-                <GanttChartSquare className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-all duration-300 group-hover:text-purple-200 group-hover:scale-110" />
+                <GanttChartSquare className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-transform duration-300 group-hover:text-purple-200 group-hover:scale-110" style={{ willChange: 'transform' }} />
                 <div className="text-4xl mb-2 font-bold text-white">10+</div>
                 <div className="text-slate-400">Jahre Erfahrung</div>
               </CardContent>
             </Card>
 
-            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-500/20 to-purple-400/20 border border-purple-400/30 transition-all duration-500 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-3xl hover:shadow-purple-500/40 hover:border-purple-400/80 [transform-style:preserve-3d] hover:rotate-x-3">
+            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-500/20 to-purple-400/20 border border-purple-400/30 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-lg hover:border-purple-400/80 [transform-style:preserve-3d]">
               <div className="absolute inset-0 bg-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 group-hover:animate-pulse-slow z-0"></div>
               <CardContent className="pt-6 text-center relative z-10">
-                <Rocket className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-all duration-300 group-hover:text-purple-200 group-hover:scale-110" />
+                <Rocket className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-transform duration-300 group-hover:text-purple-200 group-hover:scale-110" style={{ willChange: 'transform' }} />
                 <div className="text-4xl mb-2 font-bold text-white">35+</div>
                 <div className="text-slate-400">Projekte</div>
               </CardContent>
             </Card>
 
-            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-700/20 to-purple-600/20 border border-purple-600/30 transition-all duration-500 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-3xl hover:shadow-purple-500/40 hover:border-purple-600/80 [transform-style:preserve-3d] hover:rotate-x-3">
+            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-700/20 to-purple-600/20 border border-purple-600/30 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-lg hover:border-purple-600/80 [transform-style:preserve-3d]">
               <div className="absolute inset-0 bg-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 group-hover:animate-pulse-slow z-0"></div>
               <CardContent className="pt-6 text-center relative z-10">
-                <Star className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-all duration-300 group-hover:text-purple-200 group-hover:scale-110" />
+                <Star className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-transform duration-300 group-hover:text-purple-200 group-hover:scale-110" style={{ willChange: 'transform' }} />
                 <div className="text-4xl mb-2 font-bold text-white">30+</div>
                 <div className="text-slate-400">Zufriedene Kunden</div>
               </CardContent>
             </Card>
 
-            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-600/20 to-purple-700/20 border border-purple-500/30 transition-all duration-500 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-3xl hover:shadow-purple-500/40 hover:border-purple-500/80 [transform-style:preserve-3d] hover:rotate-x-3">
+            <Card className="group relative overflow-hidden bg-gradient-to-br from-purple-600/20 to-purple-700/20 border border-purple-500/30 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-lg hover:border-purple-500/80 [transform-style:preserve-3d]">
               <div className="absolute inset-0 bg-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 group-hover:animate-pulse-slow z-0"></div>
               <CardContent className="pt-6 text-center relative z-10">
-                <HeartHandshake className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-all duration-300 group-hover:text-purple-200 group-hover:scale-110" />
+                <HeartHandshake className="w-10 h-10 text-purple-400 mb-4 mx-auto transition-transform duration-300 group-hover:text-purple-200 group-hover:scale-110" style={{ willChange: 'transform' }} />
                 <div className="text-4xl mb-2 font-bold text-white">100%</div>
                 <div className="text-slate-400">Engagement</div>
               </CardContent>

@@ -72,9 +72,9 @@ export default function ProcessAlternative() {
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 {/* Card */}
-                <div className="relative h-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2">
+                <div className="relative h-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 hover:border-purple-500/50 transition-transform duration-300 hover:shadow-lg hover:-translate-y-2" style={{ willChange: 'transform' }}>
                   {/* Gradient Overlay on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   {/* Step Number Badge */}
                   <div className="relative flex items-start justify-between mb-6">
@@ -129,7 +129,7 @@ export default function ProcessAlternative() {
             <div className="inline-flex flex-col sm:flex-row gap-4 items-center">
               <button className="group relative px-8 py-4 rounded-full overflow-hidden font-medium">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] animate-gradient" />
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300" />
                 <span className="relative text-white flex items-center gap-2">
                   Jetzt kostenlos starten
                   <Rocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

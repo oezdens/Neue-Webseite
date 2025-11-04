@@ -114,7 +114,7 @@ export default function Preisuebersicht() {
             height: '24rem',
             backgroundColor: 'rgba(168, 85, 247, 0.2)',
             borderRadius: '9999px',
-            filter: 'blur(96px)'
+            filter: 'blur(24px)'
           }} />
           <div className="pricing-pulse-delay-2s" style={{
             position: 'absolute',
@@ -124,7 +124,7 @@ export default function Preisuebersicht() {
             height: '20rem',
             backgroundColor: 'rgba(236, 72, 153, 0.2)',
             borderRadius: '9999px',
-            filter: 'blur(96px)'
+            filter: 'blur(24px)'
           }} />
           <div className="pricing-pulse-delay-4s" style={{
             position: 'absolute',
@@ -134,7 +134,7 @@ export default function Preisuebersicht() {
             height: '24rem',
             backgroundColor: 'rgba(59, 130, 246, 0.1)',
             borderRadius: '9999px',
-            filter: 'blur(96px)'
+            filter: 'blur(24px)'
           }} />
         </div>
 
@@ -156,7 +156,7 @@ export default function Preisuebersicht() {
                 borderRadius: '9999px',
                 background: 'linear-gradient(to right, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
                 border: '1px solid rgba(168, 85, 247, 0.3)',
-                backdropFilter: 'blur(8px)',
+                backdropFilter: 'blur(6px)',
                 marginBottom: '1.5rem'
               }}>
                 <Star style={{ width: '1rem', height: '1rem', color: '#facc15' }} />
@@ -195,28 +195,28 @@ export default function Preisuebersicht() {
               {pricingPackages.map((pkg, index) => (
                 <div 
                   key={index}
-                  style={{
+                    style={{
                     position: 'relative',
                     background: 'linear-gradient(to bottom right, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8))',
-                    backdropFilter: 'blur(16px)',
+                    backdropFilter: 'blur(8px)',
                     border: pkg.highlighted 
                       ? '1px solid rgba(168, 85, 247, 0.5)' 
                       : '1px solid rgba(51, 65, 85, 0.5)',
                     borderRadius: '1.5rem',
                     padding: '1.5rem',
-                    transition: 'all 0.5s',
+                    transition: 'transform 0.3s, box-shadow 0.3s',
                     boxShadow: pkg.highlighted 
                       ? '0 25px 50px -12px rgba(168, 85, 247, 0.2)' 
                       : 'none'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-0.5rem)';
+                        e.currentTarget.style.transform = 'translateY(-0.5rem)';
                     if (!pkg.highlighted) {
                       e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.5)';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.transform = 'translateY(0)';
                     if (!pkg.highlighted) {
                       e.currentTarget.style.borderColor = 'rgba(51, 65, 85, 0.5)';
                     }
@@ -459,7 +459,7 @@ export default function Preisuebersicht() {
                         overflow: 'hidden',
                         border: pkg.highlighted ? 'none' : '2px solid #334155',
                         cursor: 'pointer',
-                        transition: 'all 0.2s ease'
+                        transition: 'transform 0.2s ease'
                       }}
                     >
                       {pkg.highlighted ? (

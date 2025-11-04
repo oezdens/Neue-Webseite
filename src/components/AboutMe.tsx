@@ -110,17 +110,17 @@ export default function AboutMe() {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-3 gap-8">
               {services.map((service, index) => (
                 <div 
                   key={index}
-                  className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2"
+                  className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 hover:border-purple-500/50 transition-transform duration-300 hover:-translate-y-2" style={{ willChange: 'transform' }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   <div className="relative">
                     {/* Icon */}
-                    <div className="mb-6 inline-flex p-4 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 group-hover:scale-110 transition-transform duration-300">
+                    <div className="mb-6 inline-flex p-4 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 group-hover:scale-110 transition-transform duration-300" style={{ willChange: 'transform' }}>
                       <service.icon className="w-8 h-8 text-purple-400" strokeWidth={1.5} />
                     </div>
 
@@ -174,7 +174,7 @@ export default function AboutMe() {
                       className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%]" 
                       style={{ animation: 'aboutme-gradient-xy 3s ease infinite' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300" />
                     <span className="relative text-white flex items-center gap-2">
                       Projekt starten
                       <Rocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -188,9 +188,9 @@ export default function AboutMe() {
               </div>
 
               {/* Right: Profile Image Card */}
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-4 overflow-hidden">
+                <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur-sm opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-4 overflow-hidden">
                   <div className="aspect-square rounded-2xl overflow-hidden">
                     <ImageWithFallback
                       src={ich}
@@ -202,7 +202,7 @@ export default function AboutMe() {
                   
                   {/* Floating Badge */}
                   <div 
-                    className="absolute bottom-8 left-8 px-6 py-3 rounded-2xl bg-slate-950/80 backdrop-blur-xl border border-purple-500/30"
+                    className="absolute bottom-8 left-8 px-6 py-3 rounded-2xl bg-slate-950/80 backdrop-blur-sm border border-purple-500/30"
                     style={floatAnimation}
                   >
                     <div className="flex items-center gap-3">
@@ -221,9 +221,9 @@ export default function AboutMe() {
               {highlights.map((item, index) => (
                 <div 
                   key={index}
-                  className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2"
+                  className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 hover:border-purple-500/50 transition-transform duration-300 hover:-translate-y-2" style={{ willChange: 'transform' }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   <div className="relative">
                     <item.icon className="w-8 h-8 text-purple-400 mb-4" strokeWidth={1.5} />

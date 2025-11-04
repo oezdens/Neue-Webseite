@@ -230,7 +230,7 @@ export function Header() {
           @media (prefers-reduced-motion: reduce) { .logo-mark, .logo-text { animation: none; } }
         `}
       </style>
-  <div className="w-[98%] max-w-7xl bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-4 md:px-8 py-3.5 shadow-xl flex items-center justify-between">
+  <div className="w-full max-w-7xl mx-4 sm:mx-auto bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-3 sm:px-8 py-3.5 shadow-xl flex items-center justify-between overflow-hidden">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2" aria-label="Startseite">
             <div className="logo-mark w-8 h-8 bg-gradient-to-br from-purple-600 via-purple-500 to-purple-400 rounded-lg flex items-center justify-center">
@@ -354,11 +354,11 @@ export function Header() {
 
           {/* Mobile: hamburger button (render only when truly on mobile) */}
           {isMobile && (
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center ml-2">
               <button
                 aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
                 onClick={() => setMenuOpen((s) => !s)}
-                className="p-2 rounded-md text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="p-2 rounded-md text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 -mr-1"
               >
                 {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
