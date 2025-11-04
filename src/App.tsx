@@ -17,28 +17,19 @@ export default function App() {
   const defaultTitle = "oezdens — Webentwicklung & IT";
   const defaultDescription = "Professionelle Webentwicklung & IT-Services — moderne Websites, Barrierefreiheit und transparente Preise.";
 
-  // Scroll to section on initial page load based on URL path
+  // Scroll to section on initial page load based on URL hash
   useEffect(() => {
-    const path = window.location.pathname;
-    const pathToSectionId: { [key: string]: string } = {
-      "/Startseite": "home",
-      "/leistungen": "leistungen",
-      "/ueber-mich": "ueber-mich",
-      "/ablauf": "ablauf",
-      "/preise": "preise",
-      "/kontakt": "kontakt",
-    };
-
-    const sectionId = pathToSectionId[path];
-    if (sectionId) {
+    const hash = window.location.hash.slice(1); // Remove the #
+    
+    if (hash) {
       // Wait for DOM to be ready
       setTimeout(() => {
-        const element = document.getElementById(sectionId);
+        const element = document.getElementById(hash);
         if (element) {
           const headerEl = document.querySelector("header") as HTMLElement | null;
           const headerHeight = headerEl ? headerEl.offsetHeight : 120;
           const top = element.getBoundingClientRect().top + window.scrollY;
-          const desired = sectionId === "kontakt" 
+          const desired = hash === "kontakt" 
             ? Math.max(0, top - headerHeight + 8) 
             : Math.max(0, top - headerHeight - 16);
           

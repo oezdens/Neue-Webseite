@@ -1,23 +1,6 @@
-// Small helper to navigate to page sections using the History API so URLs become
-// clean paths (e.g. /Startseite) instead of hash fragments. If the target
-// element exists on the current page the helper will perform a smooth scroll
-// and update the address bar with pushState. If the element is not present
-// (we're on another page) it falls back to a full navigation to the mapped path.
-
-type Mapping = { [id: string]: string };
-
-const PATH_MAP: Mapping = {
-  home: "/Startseite",
-  leistungen: "/leistungen",
-  "ueber-mich": "/ueber-mich",
-  ablauf: "/ablauf",
-  preise: "/preise",
-  kontakt: "/kontakt",
-};
-
+// Navigation using hash fragments - works without server configuration
 export function navigateToSection(id: string): boolean {
   const element = document.getElementById(id);
-  const targetPath = PATH_MAP[id] ?? `/${id}`;
 
   if (element) {
     // compute header offset similar to Header.tsx so the section isn't hidden
@@ -30,18 +13,13 @@ export function navigateToSection(id: string): boolean {
 
     window.scrollTo({ top: desired, behavior: "smooth" });
 
-    // Update the URL without reloading the page
-    try {
-      window.history.pushState({}, "", targetPath);
-    } catch (err) {
-      // ignore pushState errors in very old browsers
-    }
+    // Update the URL with hash
+    window.location.hash = id;
 
     return true;
   }
 
-  // element not found on this page -> navigate to the path so server/app can
-  // serve the main page which will then handle scrolling to the section
-  window.location.href = targetPath;
+  // element not found on this page -> navigate using hash
+  window.location.hash = id;
   return false;
 }

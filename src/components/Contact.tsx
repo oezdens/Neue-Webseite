@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { useState } from "react";
 import ChatBotCTA from "./ChatBotCTA";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -6,10 +7,46 @@ import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 export function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
-    alert("Vielen Dank für Ihre Nachricht! Ich werde mich bald bei Ihnen melden.");
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: `${formData.get('subject')}\n\n${formData.get('message')}`
+    };
+
+    try {
+      const response = await fetch('https://oezdens.com/send-mail.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitStatus('success');
+        (e.target as HTMLFormElement).reset();
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+        console.error('Fehler:', result.message);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Fehler beim Senden:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,8 +109,10 @@ export function Contact() {
                       </label>
                       <Input
                         id="name"
+                        name="name"
                         placeholder="Ihr Name"
                         required
+                        disabled={isSubmitting}
                         className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
                         onFocus={(e) => {
                           const t = e.currentTarget as HTMLInputElement;
@@ -93,9 +132,11 @@ export function Contact() {
                       </label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="ihre@email.de"
                         required
+                        disabled={isSubmitting}
                         className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
                         onFocus={(e) => {
                           const t = e.currentTarget as HTMLInputElement;
@@ -117,8 +158,10 @@ export function Contact() {
                     </label>
                     <Input
                       id="subject"
+                      name="subject"
                       placeholder="Worum geht es?"
                       required
+                      disabled={isSubmitting}
                       className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
                       onFocus={(e) => {
                         const t = e.currentTarget as HTMLInputElement;
@@ -139,8 +182,10 @@ export function Contact() {
                     </label>
                     <Textarea
                       id="message"
+                      name="message"
                       placeholder="Erzählen Sie mir von Ihrem Projekt..."
                       required
+                      disabled={isSubmitting}
                       rows={6}
                       className="bg-slate-800/50 border border-purple-500/20 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent invalid:border-purple-500 invalid:ring-2 invalid:ring-purple-500/50 transition"
                       onFocus={(e) => {
@@ -156,12 +201,25 @@ export function Contact() {
                     />
                   </div>
 
+                  {submitStatus === 'success' && (
+                    <div className="p-4 bg-green-900/30 border border-green-500/50 rounded-lg text-green-400">
+                      ✓ Nachricht erfolgreich gesendet! Ich melde mich bald bei Ihnen.
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-400">
+                      ✗ Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie mich direkt per E-Mail.
+                    </div>
+                  )}
+
                   <Button
                     type="submit"
-                    className="w-full rounded-lg py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 border-0 text-white font-semibold shadow-xl transform transition-all duration-150 hover:-translate-y-1"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 border-0 text-white font-semibold shadow-xl transform transition-all duration-150 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
                     <Send className="w-4 h-4 mr-2 text-white" />
-                    Nachricht senden
+                    {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
                   </Button>
                 </form>
               </CardContent>
