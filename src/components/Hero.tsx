@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
+import { navigateToSection } from "../utils/navigation";
 /* ColorBends removed */
 import LiquidEther from "./LiquidEther";
 
@@ -9,32 +10,9 @@ export function Hero() {
     const t = setTimeout(() => setAnimateActive(true), 20);
     return () => clearTimeout(t);
   }, []);
-  const scrollToContact = () => {
-    const element = document.getElementById("kontakt");
-    if (element) {
-      const headerEl = document.querySelector('header') as HTMLElement | null;
-      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-      const top = element.getBoundingClientRect().top + window.scrollY;
-      const desired = Math.max(0, top - headerHeight + 8);
-      window.scrollTo({ top: desired, behavior: 'smooth' });
-      return;
-    }
-    window.location.href = '/#kontakt';
-  };
+  const scrollToContact = () => navigateToSection("kontakt");
 
-  const scrollToServices = () => {
-    const element = document.getElementById("leistungen");
-    if (element) {
-      const headerEl = document.querySelector('header') as HTMLElement | null;
-      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-      const top = element.getBoundingClientRect().top + window.scrollY;
-      // smaller gap so the section starts a bit higher on screen
-      const desired = Math.max(0, top - headerHeight + 8);
-      window.scrollTo({ top: desired, behavior: 'smooth' });
-      return;
-    }
-    window.location.href = '/#leistungen';
-  };
+  const scrollToServices = () => navigateToSection("leistungen");
 
   return (
     <section
@@ -156,7 +134,7 @@ export function Hero() {
         {/* --- ANGEPASSTER BEREICH: CTA BUTTONS direkt unter dem Text (zentriert) --- */}
         <div className="flex justify-center items-center mt-6 mb-12">
           <a
-            href="#leistungen"
+            href="/leistungen"
             onClick={(e) => {
               e.preventDefault();
               scrollToServices();

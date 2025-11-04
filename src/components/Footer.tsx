@@ -1,4 +1,5 @@
 import { Code2, Linkedin, Mail } from "lucide-react"; // Icons für Social Media
+import { navigateToSection } from "../utils/navigation";
 
 const socialLinks = [
   { icon: Linkedin, href: "https://www.linkedin.com/in/serhat-%C3%B6zden-958130361/", name: "LinkedIn", target: '_blank', rel: 'noopener noreferrer' },
@@ -32,62 +33,62 @@ export function Footer() {
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-semibold text-white mb-4">Navigation</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#home" className="text-slate-400 hover:text-purple-400 transition-colors">Home</a></li>
-              <li><a href="#leistungen" className="text-slate-400 hover:text-purple-400 transition-colors">Leistungen</a></li>
-              <li><a href="#ueber-mich" className="text-slate-400 hover:text-purple-400 transition-colors">Über mich</a></li>
               <li>
                 <a
-                  href="/#ablauf"
+                  href="/Startseite"
                   onClick={(e) => {
                     e.preventDefault();
-                    const element = document.getElementById("ablauf");
-                    if (element) {
-                      const headerEl = document.querySelector('header') as HTMLElement | null;
-                      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-                      const top = element.getBoundingClientRect().top + window.scrollY;
-                      const desired = Math.max(0, top - headerHeight - 16);
-                      window.scrollTo({ top: desired, behavior: 'smooth' });
-                      return;
-                    }
-                    window.location.href = '/#ablauf';
+                    navigateToSection("home");
+                  }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Home</a>
+              </li>
+              <li>
+                <a
+                  href="/leistungen"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToSection("leistungen");
+                  }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Leistungen</a>
+              </li>
+              <li>
+                <a
+                  href="/ueber-mich"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToSection("ueber-mich");
+                  }}
+                  className="text-slate-400 hover:text-purple-400 transition-colors"
+                >Über mich</a>
+              </li>
+              <li>
+                <a
+                  href="/ablauf"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateToSection("ablauf");
                   }}
                   className="text-slate-400 hover:text-purple-400 transition-colors"
                 >Ablauf</a>
               </li>
               <li>
                 <a
-                  href="/#preise"
+                  href="/preise"
                   onClick={(e) => {
                     e.preventDefault();
-                    const element = document.getElementById("preise");
-                    if (element) {
-                      const headerEl = document.querySelector('header') as HTMLElement | null;
-                      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-                      const top = element.getBoundingClientRect().top + window.scrollY;
-                      const desired = Math.max(0, top - headerHeight - 16);
-                      window.scrollTo({ top: desired, behavior: 'smooth' });
-                      return;
-                    }
-                    window.location.href = '/#preise';
+                    navigateToSection("preise");
                   }}
                   className="text-slate-400 hover:text-purple-400 transition-colors"
                 >Preise</a>
               </li>
               <li>
                 <a
-                  href="/#kontakt"
+                  href="/kontakt"
                   onClick={(e) => {
                     e.preventDefault();
-                    const element = document.getElementById("kontakt");
-                    if (element) {
-                      const headerEl = document.querySelector('header') as HTMLElement | null;
-                      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-                      const top = element.getBoundingClientRect().top + window.scrollY;
-                      const desired = Math.max(0, top - headerHeight - 16);
-                      window.scrollTo({ top: desired, behavior: 'smooth' });
-                      return;
-                    }
-                    window.location.href = '/#kontakt';
+                    navigateToSection("kontakt");
                   }}
                   className="text-slate-400 hover:text-purple-400 transition-colors"
                 >Kontakt</a>
@@ -127,20 +128,10 @@ export function Footer() {
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-semibold text-white mb-4">Kontakt</h3>
             <a
-              href="#kontakt"
+              href="/kontakt"
               onClick={(e) => {
                 e.preventDefault();
-                const element = document.getElementById("kontakt");
-                if (element) {
-                  const headerEl = document.querySelector('header') as HTMLElement | null;
-                  const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-                  const top = element.getBoundingClientRect().top + window.scrollY;
-                  const desired = Math.max(0, top - headerHeight - 16);
-                  window.scrollTo({ top: desired, behavior: 'smooth' });
-                  return;
-                }
-                // fallback when not on the main page
-                window.location.href = '/#kontakt';
+                navigateToSection("kontakt");
               }}
               className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2 rounded-full hover:opacity-90 transition-opacity text-sm font-medium mb-4"
             >
@@ -171,7 +162,7 @@ export function Footer() {
         <div className="flex justify-between items-center text-sm text-slate-500">
           <p>&copy; {currentYear} oezdens. Alle Rechte vorbehalten.</p>
           <div className="flex space-x-4">
-            <a href="/impressum1" className="hover:text-purple-400 transition-colors">Impressum</a>
+            <a href="/impressum" className="hover:text-purple-400 transition-colors">Impressum</a>
             <a href="/datenschutz" className="hover:text-purple-400 transition-colors">Datenschutz</a>
             <a href="/barrierefreiheit" className="hover:text-purple-400 transition-colors">Barrierefreiheit</a>
           </div>

@@ -1,0 +1,8 @@
+# robots.txt for your website
+# Generated for https://oezdens.com
+User-agent: *
+Disallow:
+
+# Point search engines to the sitemap
+Sitemap: https://oezdens.com/sitemap.xml
+# Host: https://oezdens.com

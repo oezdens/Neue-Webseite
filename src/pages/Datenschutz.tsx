@@ -1,5 +1,6 @@
 import { CSSProperties, useEffect } from 'react';
-import { Shield, Lock, Eye, UserCheck, Database, Cookie } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Shield, Lock, Eye, UserCheck, Database, Cookie, Cloud } from 'lucide-react';
 
 export function Datenschutz() {
   const containerStyle: CSSProperties = {
@@ -127,10 +128,16 @@ export function Datenschutz() {
   const iconStyle = { width: '24px', height: '24px', color: '#ec4899' };
 
   return (
+    <>
+      <Helmet>
+        <title>Datenschutzerklärung — oezdens</title>
+        <meta name="description" content="Datenschutzerklärung von oezdens — Informationen zur Verarbeitung personenbezogener Daten und Ihren Rechten." />
+        <link rel="canonical" href="https://oezdens.com/datenschutz" />
+      </Helmet>
     <div style={containerStyle}>
       <div style={innerContainerStyle}>
-  {/* Header */}
-  <div id="page-header" style={headerStyle}>
+        {/* Header */}
+        <div id="page-header" style={headerStyle}>
           <div style={iconBoxStyle}>
             <Shield style={{ width: '32px', height: '32px', color: '#ec4899' }} />
           </div>
@@ -156,8 +163,8 @@ export function Datenschutz() {
             <div style={highlightBoxStyle}>
               <p style={{ color: '#cbd5e1', margin: 0 }}>
                 <strong style={{ color: '#ffffff' }}>Verantwortliche Stelle:</strong> Die 
-                verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist die 
-                oezdens GbR. Weitere Informationen finden Sie im Impressum.
+                verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist **Serhat Özden**. 
+                Die vollständigen Kontaktdaten finden Sie im <a href="/impressum" style={linkStyle}>Impressum</a>.
               </p>
             </div>
           </section>
@@ -172,7 +179,7 @@ export function Datenschutz() {
             <div style={{ marginBottom: '24px' }}>
               <h3 style={h3Style}>Wer ist verantwortlich für die Datenerfassung?</h3>
               <p style={textStyle}>
-                Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. 
+                Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber **Serhat Özden**.
                 Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.
               </p>
             </div>
@@ -194,9 +201,26 @@ export function Datenschutz() {
               <h3 style={h3Style}>Wofür nutzen wir Ihre Daten?</h3>
               <p style={textStyle}>
                 Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website 
-                zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
+                zu gewährleisten und die Sicherheit unserer IT-Systeme zu gewährleisten.
               </p>
             </div>
+          </section>
+
+          {/* Hosting */}
+          <section style={sectionStyle}>
+            <h2 style={h2Style}>
+              <Cloud style={iconStyle} />
+              Hosting und Content Delivery Networks (CDN)
+            </h2>
+            <p style={textStyle}>
+              Diese Website wird bei **STRATO AG** (Otto-Lilienthal-Straße 1, 31135 Hildesheim, Deutschland) gehostet. 
+              Der Hoster verarbeitet in unserem Auftrag alle Daten, die auf dieser Website verarbeitet werden oder über die Website erhoben werden. 
+              Dies ist insbesondere zur Bereitstellung der Website, Gewährleistung von Stabilität und Sicherheit erforderlich.
+            </p>
+            <p style={textStyle}>
+              Die Nutzung von STRATO erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer technisch einwandfreien und optimierten Bereitstellung unserer Website.
+              Soweit eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TTDSG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TTDSG umfasst. Die Einwilligung ist jederzeit widerrufbar.
+            </p>
           </section>
 
           {/* Server Log Files */}
@@ -206,7 +230,7 @@ export function Datenschutz() {
               Server-Log-Dateien
             </h2>
             <p style={textStyle}>
-              Der Provider der Seiten erhebt und speichert automatisch Informationen in 
+              Der Provider der Seiten (STRATO) erhebt und speichert automatisch Informationen in 
               so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. 
               Dies sind:
             </p>
@@ -220,7 +244,7 @@ export function Datenschutz() {
             </ul>
             <p style={textStyle}>
               Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. 
-              Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+              Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO zur Gewährleistung der technischen Sicherheit und Optimierung unserer Dienste.
             </p>
           </section>
 
@@ -238,32 +262,25 @@ export function Datenschutz() {
             </p>
             
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={h3Style}>Arten von Cookies:</h3>
+              <h3 style={h3Style}>Rechtsgrundlage und Arten von Cookies:</h3>
+              <p style={textStyle}>
+                Wir verwenden ausschließlich **technisch notwendige Cookies**, die für den Betrieb unserer Website 
+                und die Bereitstellung grundlegender Funktionen erforderlich sind.
+              </p>
               <ul style={listStyle}>
                 <li style={listItemStyle}>
                   <strong style={{ color: '#ffffff' }}>Notwendige Cookies:</strong> Erforderlich 
-                  für den Betrieb der Website
-                </li>
-                <li style={listItemStyle}>
-                  <strong style={{ color: '#ffffff' }}>Analytische Cookies:</strong> Helfen uns, 
-                  die Nutzung der Website zu verstehen
-                </li>
-                <li style={listItemStyle}>
-                  <strong style={{ color: '#ffffff' }}>Marketing Cookies:</strong> Werden verwendet, 
-                  um relevante Werbung bereitzustellen
-                </li>
-                <li style={listItemStyle}>
-                  <strong style={{ color: '#ffffff' }}>Präferenz Cookies:</strong> Speichern Ihre 
-                  Einstellungen und Präferenzen
+                  für den Betrieb der Website (z.B. Speicherung Ihrer Login-Daten). Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO, da wir ein berechtigtes Interesse an der technisch fehlerfreien Bereitstellung unserer Dienste haben.
                 </li>
               </ul>
-            </div>
-
-            <div style={highlightBoxStyle}>
-              <p style={{ color: '#cbd5e1', margin: 0 }}>
-                Sie können Ihre Cookie-Einstellungen jederzeit über unser Cookie-Banner anpassen.
+              <p style={textStyle}>
+                **Wir verwenden keine Cookies zu Analyse-, Marketing- oder Trackingzwecken.**
               </p>
             </div>
+            
+            <p style={textStyle}>
+                Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+            </p>
           </section>
 
           {/* Contact Forms */}
@@ -374,5 +391,6 @@ export function Datenschutz() {
         </div>
       </div>
     </div>
+    </>
   );
 }

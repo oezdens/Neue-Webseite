@@ -1,4 +1,5 @@
 import { CSSProperties, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Scale, Mail, Phone, MapPin } from 'lucide-react';
 
 export function Impressum() {
@@ -82,9 +83,9 @@ export function Impressum() {
     lineHeight: '1.6',
   };
 
-  const labelStyle: CSSProperties = {
-    color: '#94a3b8',
-  };
+  // const labelStyle: CSSProperties = {
+  //   color: '#94a3b8',
+  // };
 
   const contactItemStyle: CSSProperties = {
     display: 'flex',
@@ -142,10 +143,16 @@ export function Impressum() {
   }, []);
 
   return (
+    <>
+      <Helmet>
+        <title>Impressum — oezdens</title>
+        <meta name="description" content="Impressum von oezdens — Kontaktdaten, Betreiberinformationen und rechtliche Hinweise gemäß §5 TMG." />
+        <link rel="canonical" href="https://oezdens.com/impressum" />
+      </Helmet>
     <div style={containerStyle}>
       <div style={innerContainerStyle}>
-  {/* Header */}
-  <div id="page-header" style={headerStyle}>
+        {/* Header */}
+        <div id="page-header" style={headerStyle}>
           <div style={iconBoxStyle}>
             <Scale style={{ width: '32px', height: '32px', color: '#ec4899' }} />
           </div>
@@ -157,73 +164,68 @@ export function Impressum() {
 
         {/* Main Content */}
         <div>
-          {/* Company Info */}
+          {/* Anbieter (Anpassung für Einzelunternehmen & § 5 TMG) */}
           <section style={sectionStyle}>
-            <h2 style={h2Style}>Anbieter</h2>
-            <div style={{ marginBottom: '12px' }}>
-              <p style={{ ...textStyle, fontSize: '18px' }}>oezdens GbR</p>
-              <p style={textStyle}>Geschäftsführer: Serhat Özden</p>
-          
-            
-              <p style={textStyle}>
-                <span style={labelStyle}>USt-IdNr.:</span> Kleingewerbetreibend, keine USt-IdNr. vorhanden
+            <h2 style={h2Style}>Diensteanbieter / Betreiber</h2>
+            <div style={textStyle}>
+              <p style={{ paddingTop: '8px', marginBottom: '4px', fontWeight: 600 }}>Serhat Özden</p>
+              
+              <div style={{...contactItemStyle, marginTop: '20px'}}>
+                  <div style={iconContainerStyle}>
+                      <MapPin style={{ width: '20px', height: '20px', color: '#ec4899' }} />
+                  </div>
+                  <div style={textStyle}>
+                      <p style={{ marginBottom: '4px' }}>Bodemstall 6</p>
+                      <p style={{ marginBottom: '4px' }}>74177 Bad Friedrichshall</p>
+                      <p>Deutschland</p>
+                  </div>
+              </div>
+
+              <div style={{...contactItemStyle, marginTop: '20px'}}>
+                <div style={iconContainerStyle}>
+                    <Phone style={{ width: '20px', height: '20px', color: '#ec4899' }} />
+                </div>
+                <a 
+                    href="tel:+4989123456789" 
+                    style={linkStyle}
+                    onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
+                    onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
+                >
+                    +49 (0) 89 / 12 34 56 - 789
+                </a>
+              </div>
+              
+              <div style={contactItemStyle}>
+                  <div style={iconContainerStyle}>
+                      <Mail style={{ width: '20px', height: '20px', color: '#ec4899' }} />
+                  </div>
+                  <a 
+                      href="mailto:oezdens.web@outlook.de" 
+                      style={linkStyle}
+                      onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
+                      onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
+                  >
+                      oezdens.web@outlook.de
+                  </a>
+              </div>
+
+              <h3 style={{...h3Style, marginTop: '24px'}}>Steuerliche Angaben</h3>
+              <p style={{ marginBottom: '4px' }}>
+                Steuernummer: **[Ihre Steuernummer hier einfügen]**
+              </p>
+              <p style={{ marginBottom: 0 }}>
+                USt-IdNr.: Kleingewerbetreibend, keine USt-IdNr. vorhanden
               </p>
             </div>
           </section>
 
-          {/* Contact Info */}
-          <section style={sectionStyle}>
-            <h2 style={h2Style}>Kontakt</h2>
-            <div>
-              <div style={contactItemStyle}>
-                <div style={iconContainerStyle}>
-                  <MapPin style={{ width: '20px', height: '20px', color: '#ec4899' }} />
-                </div>
-                <div style={textStyle}>
-                  <p style={{ marginBottom: '4px' }}>Bodemstall 6</p>
-                  <p style={{ marginBottom: '4px' }}>74177 Bad Friedrichshall</p>
-                  <p>Deutschland</p>
-                </div>
-              </div>
-
-              <div style={contactItemStyle}>
-                <div style={iconContainerStyle}>
-                  <Phone style={{ width: '20px', height: '20px', color: '#ec4899' }} />
-                </div>
-                <a 
-                  href="tel:+4989123456789" 
-                  style={linkStyle}
-                  onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                  onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
-                >
-                  +49 (0) 89 / 12 34 56 - 789
-                </a>
-              </div>
-
-              <div style={contactItemStyle}>
-                <div style={iconContainerStyle}>
-                  <Mail style={{ width: '20px', height: '20px', color: '#ec4899' }} />
-                </div>
-                <a 
-                  href="mailto:oezdens.web@outlook.de" 
-                  style={linkStyle}
-                  onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                  onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
-                >
-                  oezdens.web@outlook.de
-                </a>
-              </div>
-            </div>
-          </section>
-
-          {/* Responsible for Content */}
+          {/* Verantwortlich für den Inhalt (§ 55 RStV) */}
           <section style={sectionStyle}>
             <h2 style={h2Style}>Verantwortlich für den Inhalt</h2>
             <div style={textStyle}>
               <p style={{ marginBottom: '8px' }}>gemäß § 55 Abs. 2 RStV:</p>
               <p style={{ paddingTop: '8px', marginBottom: '4px' }}>Serhat Özden</p>
-              <p style={{ marginBottom: '4px' }}>Bodemstall 6</p>
-              <p>74177 Bad Friedrichshall</p>
+              <p>Bodemstall 6, 74177 Bad Friedrichshall</p>
             </div>
           </section>
 
@@ -296,10 +298,11 @@ export function Impressum() {
         </div>
 
         {/* Footer Note */}
-        <div style={footerStyle}>
-          <p>Stand: Oktober 2025</p>
+            <div style={footerStyle}>
+            <p>Stand: Oktober 2025</p>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+      </>
+    );
+  }

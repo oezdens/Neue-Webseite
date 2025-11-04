@@ -1,4 +1,5 @@
 import { CSSProperties, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Accessibility, Eye, Ear, Keyboard, Monitor, Heart, CheckCircle } from 'lucide-react';
 
 export function Barrierefreiheit() {
@@ -154,6 +155,12 @@ export function Barrierefreiheit() {
   const featureIconSmallStyle = { width: '20px', height: '20px', color: '#ec4899' };
 
   return (
+    <>
+      <Helmet>
+        <title>Barrierefreiheit — oezdens</title>
+        <meta name="description" content="Barrierefreiheit bei oezdens — Informationen zu Maßnahmen, Standards (WCAG 2.1 AA) und Kontakt für Barrierefreiheitsfragen." />
+        <link rel="canonical" href="https://oezdens.com/barrierefreiheit" />
+      </Helmet>
     <div style={containerStyle}>
       <div style={innerContainerStyle}>
   {/* Header */}
@@ -394,5 +401,6 @@ export function Barrierefreiheit() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,40 +1,18 @@
-import { Code2 } from "lucide-react";
+import { Code2, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { navigateToSection } from "../utils/navigation";
 
 export function Header() {
   const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      // measure header height and scroll with offset so the target isn't hidden
-      // For the Kontakt section we want a slightly smaller gap (appear a bit higher),
-      // so apply a special adjustment. Other sections keep the previous gap.
-      const headerEl = document.querySelector('header') as HTMLElement | null;
-      const headerHeight = headerEl ? headerEl.offsetHeight : 120;
-      const top = element.getBoundingClientRect().top + window.scrollY;
-      let desired: number;
-      if (id === "kontakt") {
-        // smaller gap: move the target a bit higher (closer to the header)
-        desired = Math.max(0, top - headerHeight + 8);
-      } else {
-        // previous behavior: small comfortable gap below the header
-        desired = Math.max(0, top - headerHeight - 16);
-      }
-      window.scrollTo({ top: desired, behavior: 'smooth' });
-      setActiveSection(id);
-      return;
-    }
-
-    // If the section is not on the current page (we're on a static page like /impressum1),
-    // navigate to the root and include the hash so the main page can handle scrolling.
-    if (id === "home") {
-      window.location.href = "/";
-    } else {
-      // set active so the nav highlights immediately, then navigate
-      setActiveSection(id);
-      window.location.href = `/#${id}`;
-    }
+    // Use a shared helper that performs smooth scroll when the element exists
+    // and otherwise navigates to a clean path (e.g. /Startseite).
+    navigateToSection(id);
+    setActiveSection(id);
+    setMenuOpen(false);
   };
 
   // Scroll-spy: observe sections and update the active nav item as the user scrolls
@@ -43,6 +21,27 @@ export function Header() {
   // MutationObserver to pick up elements that are added later so the nav becomes
   // active when those sections scroll into view.
   useEffect(() => {
+    // close mobile menu when switching to desktop size and keep a reliable
+    // `isMobile` flag using matchMedia. This prevents the mobile menu from
+    // rendering on larger screens even if CSS classes are misapplied.
+    const mq = window.matchMedia("(max-width: 767px)");
+    const handleMq = (e: MediaQueryList | MediaQueryListEvent) => {
+      const mobile = "matches" in e ? e.matches : mq.matches;
+      setIsMobile(!!mobile);
+      if (!mobile && menuOpen) setMenuOpen(false);
+    };
+
+    // initial set
+    handleMq(mq);
+
+    // Listen for changes
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", handleMq as any);
+    } else if (typeof mq.addListener === "function") {
+      // Safari/older browsers
+      mq.addListener(handleMq as any);
+    }
+
     const ids = ["home", "leistungen", "ueber-mich", "ablauf", "preise", "kontakt"];
 
     const observer = new IntersectionObserver(
@@ -105,6 +104,11 @@ export function Header() {
     return () => {
       observer.disconnect();
       mo.disconnect();
+      if (typeof mq.removeEventListener === "function") {
+        mq.removeEventListener("change", handleMq as any);
+      } else if (typeof mq.removeListener === "function") {
+        mq.removeListener(handleMq as any);
+      }
     };
   }, []);
 
@@ -202,20 +206,44 @@ export function Header() {
             will-change: transform, box-shadow, opacity;
           }
           @media (prefers-reduced-motion: reduce) { .blink { animation: none; transform: none; box-shadow: none; } }
+
+          /* Animated gradient used by the logo mark and text */
+          @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+
+          .logo-mark {
+            background-size: 200% 200%;
+            animation: gradientShift 6s linear infinite;
+          }
+
+          .logo-text {
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 6s linear infinite;
+          }
+
+          @media (prefers-reduced-motion: reduce) { .logo-mark, .logo-text { animation: none; } }
         `}
       </style>
-      <div className="w-[98%] max-w-7xl bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-8 py-3.5 shadow-xl flex items-center justify-between">
+  <div className="w-[98%] max-w-7xl bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-4 md:px-8 py-3.5 shadow-xl flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2" aria-label="Startseite">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-purple-400 rounded-lg flex items-center justify-center">
+            <div className="logo-mark w-8 h-8 bg-gradient-to-br from-purple-600 via-purple-500 to-purple-400 rounded-lg flex items-center justify-center">
               <Code2 className="w-5 h-5" />
             </div>
-            <span className="font-bold text-lg">oezdens</span>
+            <span className="logo-text font-bold text-lg bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400">oezdens</span>
           </a>
 
-          {/* Navigation */}
-          {/* GEÄNDERT: gap-12 für gleichmäßigen, großen Abstand. */}
-          <nav className="flex items-center gap-14 text-sm">
+          {/* Navigation (desktop) — render when JS detects a non-mobile viewport so
+              we don't depend solely on Tailwind breakpoints which can fail if CSS
+              isn't applied yet. */}
+          {!isMobile && (
+            <nav className="flex items-center gap-14 text-sm">
             {/* Home */}
             <button
               onClick={() => scrollToSection("home")}
@@ -321,8 +349,83 @@ export function Header() {
             >
               Kontakt
             </a>
-          </nav>
+            </nav>
+          )}
+
+          {/* Mobile: hamburger button (render only when truly on mobile) */}
+          {isMobile && (
+            <div className="md:hidden flex items-center">
+              <button
+                aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+                onClick={() => setMenuOpen((s) => !s)}
+                className="p-2 rounded-md text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+              >
+                {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          )}
       </div>
+
+      {/* Mobile menu panel (drops under header) */}
+      {isMobile && menuOpen && (
+        <div className="md:hidden fixed inset-x-4 top-[72px] z-40 bg-slate-950/95 backdrop-blur-md rounded-xl p-4 shadow-xl mx-4">
+          <nav className="flex flex-col gap-3 text-base">
+            <button
+              onClick={() => scrollToSection("home")}
+              className={`text-left pb-1 transition-all duration-200 ${
+                activeSection === "home" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Home
+            </button>
+
+            <button
+              onClick={() => scrollToSection("leistungen")}
+              className={`text-left pb-1 transition-all duration-200 ${
+                activeSection === "leistungen" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Leistungen
+            </button>
+
+            <button
+              onClick={() => scrollToSection("ueber-mich")}
+              className={`text-left pb-1 transition-all duration-200 ${
+                activeSection === "ueber-mich" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Über mich
+            </button>
+
+            <button
+              onClick={() => scrollToSection("ablauf")}
+              className={`text-left pb-1 transition-all duration-200 ${
+                activeSection === "ablauf" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Ablauf
+            </button>
+
+            <button
+              onClick={() => scrollToSection("preise")}
+              className={`text-left pb-1 transition-all duration-200 ${
+                activeSection === "preise" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
+              }`}
+            >
+              Preise
+            </button>
+
+            <button
+              onClick={() => scrollToSection("kontakt")}
+              className={`mt-2 text-left bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium ${
+                activeSection === "kontakt" ? "blink" : ""
+              }`}
+            >
+              Kontakt
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

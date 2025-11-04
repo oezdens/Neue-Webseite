@@ -25,7 +25,7 @@ export default function AboutMe() {
     {
       title: "UI/UX Design",
       icon: Palette,
-      description: "Benutzerfreundliche Interfaces mit Fokus auf optimale User Experience."
+      description: "Ihre Website wird von mir individuell entwickelt. Ich setze alle Ihre Anforderungen zielgenau um, bis Sie zu 100 % zufrieden sind."
     }
   ];
   
@@ -196,6 +196,7 @@ export default function AboutMe() {
                       src={ich}
                       alt="Developer Workspace"
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   
