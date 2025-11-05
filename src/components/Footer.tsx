@@ -162,9 +162,9 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-slate-500 gap-3">
           <p>&copy; {currentYear} oezdens. Alle Rechte vorbehalten.</p>
           <div className="flex flex-wrap sm:space-x-4 gap-2 sm:gap-0 items-center justify-center">
-            <a href="/impressum" className="hover:text-purple-400 transition-colors">Impressum</a>
-            <a href="/datenschutz" className="hover:text-purple-400 transition-colors">Datenschutz</a>
-            <a href="/barrierefreiheit" className="hover:text-purple-400 transition-colors">Barrierefreiheit</a>
+            <a href="#/impressum" className="hover:text-purple-400 transition-colors">Impressum</a>
+            <a href="#/datenschutz" className="hover:text-purple-400 transition-colors">Datenschutz</a>
+            <a href="#/barrierefreiheit" className="hover:text-purple-400 transition-colors">Barrierefreiheit</a>
           </div>
         </div>
 

@@ -23,7 +23,7 @@ export function Contact() {
     };
 
     try {
-      const response = await fetch('https://oezdens.com/send-mail.php', {
+      const response = await fetch('/send-mail.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,9 +49,47 @@ export function Contact() {
     }
   };
 
+  // Custom styles for contact form to avoid white browser autofill/selection
+  const customStyles = `
+    /* Scope to this form to avoid global side-effects */
+    .contact-form input::selection, .contact-form textarea::selection {
+      background: rgba(123,44,255,0.28);
+      color: #ffffff;
+    }
+
+    /* Autofill background for WebKit-based browsers (Chrome, Edge, Safari)
+       make it match the dark theme instead of default yellow/white */
+    .contact-form input:-webkit-autofill,
+    .contact-form textarea:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #0f172a inset !important;
+      box-shadow: 0 0 0 1000px #0f172a inset !important;
+      -webkit-text-fill-color: #cbd5e1 !important;
+    }
+
+    /* For Firefox - set background on :autofill if supported */
+    .contact-form input:-moz-autofill,
+    .contact-form textarea:-moz-autofill {
+      box-shadow: 0 0 0 1000px #0f172a inset !important;
+      -moz-text-fill-color: #cbd5e1 !important;
+    }
+
+    /* Ensure any temporarily shown browser UI (autocomplete popup) uses
+       a gentle purple highlight when text is selected inside the inputs */
+    .contact-form input, .contact-form textarea {
+      background-color: rgba(15,23,42,0.6);
+      color: #e6eef8;
+    }
+
+    /* Make success / error messages explicitly visible on dark bg */
+    .contact-success { color: #86efac !important; }
+    .contact-error { color: #fecaca !important; }
+  `;
+
   return (
     <section id="kontakt" className="py-20 px-6">
       <div className="container mx-auto">
+        {/* Inject component-scoped styles to override browser autofill/selection */}
+        <style dangerouslySetInnerHTML={{ __html: customStyles }} />
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl mb-4 bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent">
@@ -64,7 +102,7 @@ export function Contact() {
 
         <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
           {/* Contact Info Cards */}
-          <div className="h-full flex flex-col justify-between">
+          <div className="h-full flex flex-col gap-4">
             <Card className="bg-slate-900/50 border-purple-500/20 p-6 md:p-8 min-h-[220px] md:min-h-[360px]">
               <CardHeader>
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center mb-2 shadow-lg ring-1 ring-purple-600/20">
@@ -101,7 +139,7 @@ export function Contact() {
                 <CardTitle className="text-white">Nachricht senden</CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 contact-form">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-slate-300">
@@ -202,13 +240,13 @@ export function Contact() {
                   </div>
 
                   {submitStatus === 'success' && (
-                    <div className="p-4 bg-green-900/30 border border-green-500/50 rounded-lg text-green-400">
+                    <div className="p-4 bg-green-900/30 border border-green-500/50 rounded-lg contact-success">
                       ✓ Nachricht erfolgreich gesendet! Ich melde mich bald bei Ihnen.
                     </div>
                   )}
 
                   {submitStatus === 'error' && (
-                    <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-400">
+                    <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-lg contact-error">
                       ✗ Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie mich direkt per E-Mail.
                     </div>
                   )}

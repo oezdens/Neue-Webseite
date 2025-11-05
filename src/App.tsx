@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { Helmet } from "react-helmet-async";
 import { Hero } from "./components/Hero";
@@ -17,9 +17,26 @@ export default function App() {
   const defaultTitle = "oezdens — Webentwicklung & IT";
   const defaultDescription = "Professionelle Webentwicklung & IT-Services — moderne Websites, Barrierefreiheit und transparente Preise.";
 
+  // Track hash changes for client-side routing
+  const [currentHash, setCurrentHash] = useState(
+    typeof window !== "undefined" ? window.location.hash : ""
+  );
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   // Scroll to section on initial page load based on URL hash
   useEffect(() => {
     const hash = window.location.hash.slice(1); // Remove the #
+    
+    // Skip scrolling if it's a page route like #/impressum
+    if (hash.startsWith('/')) return;
     
     if (hash) {
       // Wait for DOM to be ready
@@ -60,9 +77,10 @@ export default function App() {
       }`}</script>
     </Helmet>
   );
-  const path = typeof window !== "undefined" ? window.location.pathname : "/";
+  // Use hash-based routing to avoid needing server rewrites
+  const hash = currentHash;
 
-  if (path === "/impressum") {
+  if (hash === "#/impressum") {
     return (
       <div className="min-h-screen bg-slate-950 text-white">
         {head}
@@ -73,7 +91,7 @@ export default function App() {
     );
   }
 
-  if (path === "/datenschutz") {
+  if (hash === "#/datenschutz") {
     return (
       <div className="min-h-screen bg-slate-950 text-white">
         {head}
@@ -84,7 +102,7 @@ export default function App() {
     );
   }
 
-  if (path === "/barrierefreiheit") {
+  if (hash === "#/barrierefreiheit") {
     return (
       <div className="min-h-screen bg-slate-950 text-white">
         {head}

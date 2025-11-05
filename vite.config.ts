@@ -58,5 +58,13 @@
     server: {
       port: 3000,
       open: true,
+      proxy: {
+        // Proxy send-mail.php to the live server to avoid CORS during local dev
+        '/send-mail.php': {
+          target: 'https://oezdens.com',
+          changeOrigin: true,
+          secure: true,
+        },
+      },
     },
   });

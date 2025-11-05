@@ -177,7 +177,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex justify-center items-center py-4 bg-transparent">
+  <header className="fixed top-0 left-0 w-full z-50 flex justify-center items-center py-4 bg-transparent">
       {/* Small local styles for the header blink effect when Kontakt is active */}
       <style>
         {`@keyframes blinkPulse {
@@ -230,7 +230,7 @@ export function Header() {
           @media (prefers-reduced-motion: reduce) { .logo-mark, .logo-text { animation: none; } }
         `}
       </style>
-  <div className="w-full max-w-7xl mx-4 sm:mx-auto bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-3 sm:px-8 py-3.5 shadow-xl flex items-center justify-between overflow-hidden">
+  <div className="w-full max-w-7xl mx-4 sm:mx-auto bg-slate-950/30 backdrop-blur-2xl border border-purple-500/20 rounded-full px-3 sm:px-8 py-3.5 shadow-xl flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2" aria-label="Startseite">
             <div className="logo-mark w-8 h-8 bg-gradient-to-br from-purple-600 via-purple-500 to-purple-400 rounded-lg flex items-center justify-center">
@@ -354,11 +354,16 @@ export function Header() {
 
           {/* Mobile: hamburger button (render only when truly on mobile) */}
           {isMobile && (
-            <div className="md:hidden flex items-center ml-2">
+            <div className="md:hidden flex items-center ml-2 z-50">
               <button
                 aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
-                onClick={() => setMenuOpen((s) => !s)}
-                className="p-2 rounded-md text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 -mr-1"
+                  onClick={() => setMenuOpen((s) => !s)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") setMenuOpen((s) => !s);
+                  }}
+                  className="p-2 rounded-md text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 -mr-1"
+                  role="button"
+                  tabIndex={0}
               >
                 {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -368,11 +373,21 @@ export function Header() {
 
       {/* Mobile menu panel (drops under header) */}
       {isMobile && menuOpen && (
-        <div className="md:hidden fixed inset-x-4 top-[72px] z-40 bg-slate-950/95 backdrop-blur-md rounded-xl p-4 shadow-xl mx-4">
-          <nav className="flex flex-col gap-3 text-base">
+        <div className="md:hidden fixed inset-0 z-[60] bg-slate-950/95 backdrop-blur-md">
+          {/* close button in overlay */}
+          <div className="absolute top-4 right-4">
+            <button
+              aria-label="Menü schließen"
+              onClick={() => setMenuOpen(false)}
+              className="p-2 rounded-md text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          <nav className="h-full flex flex-col items-center justify-center gap-6 text-xl px-6">
             <button
               onClick={() => scrollToSection("home")}
-              className={`text-left pb-1 transition-all duration-200 ${
+              className={`w-full text-center pb-1 transition-all duration-200 ${
                 activeSection === "home" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
               }`}
             >
@@ -381,7 +396,7 @@ export function Header() {
 
             <button
               onClick={() => scrollToSection("leistungen")}
-              className={`text-left pb-1 transition-all duration-200 ${
+              className={`w-full text-center pb-1 transition-all duration-200 ${
                 activeSection === "leistungen" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
               }`}
             >
@@ -390,7 +405,7 @@ export function Header() {
 
             <button
               onClick={() => scrollToSection("ueber-mich")}
-              className={`text-left pb-1 transition-all duration-200 ${
+              className={`w-full text-center pb-1 transition-all duration-200 ${
                 activeSection === "ueber-mich" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
               }`}
             >
@@ -399,7 +414,7 @@ export function Header() {
 
             <button
               onClick={() => scrollToSection("ablauf")}
-              className={`text-left pb-1 transition-all duration-200 ${
+              className={`w-full text-center pb-1 transition-all duration-200 ${
                 activeSection === "ablauf" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
               }`}
             >
@@ -408,7 +423,7 @@ export function Header() {
 
             <button
               onClick={() => scrollToSection("preise")}
-              className={`text-left pb-1 transition-all duration-200 ${
+              className={`w-full text-center pb-1 transition-all duration-200 ${
                 activeSection === "preise" ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold" : "text-slate-300 hover:text-white"
               }`}
             >
@@ -417,7 +432,7 @@ export function Header() {
 
             <button
               onClick={() => scrollToSection("kontakt")}
-              className={`mt-2 text-left bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-sm font-medium ${
+              className={`w-full max-w-xs text-center mt-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all text-base font-medium ${
                 activeSection === "kontakt" ? "blink" : ""
               }`}
             >

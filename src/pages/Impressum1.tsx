@@ -210,9 +210,6 @@ export function Impressum() {
               </div>
 
               <h3 style={{...h3Style, marginTop: '24px'}}>Steuerliche Angaben</h3>
-              <p style={{ marginBottom: '4px' }}>
-                Steuernummer: **[Ihre Steuernummer hier einfügen]**
-              </p>
               <p style={{ marginBottom: 0 }}>
                 USt-IdNr.: Kleingewerbetreibend, keine USt-IdNr. vorhanden
               </p>
